@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use Hash;
 use App\Models\Admin;
 use App\Mail\Websitemail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard.index');
     }
 
     public function login()
@@ -72,7 +73,7 @@ class AdminController extends Controller
         $message = 'Click on the following link to reset your password: <br>';
         $message .= '<a href="'.$link.'">'.$link.'</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject,$message));
+        Mail::to($request->email)->send(new Websitemail($subject,$message));
 
         return redirect()->back()->with('success', 'Reset password link sent to your email');
 
@@ -104,7 +105,7 @@ class AdminController extends Controller
 
     public function profile()
     {
-        return view('admin.profile');
+        return view('admin.profile.index');
     }
 
     public function profile_submit(Request $request)
