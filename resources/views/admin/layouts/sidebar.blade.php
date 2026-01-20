@@ -10,6 +10,12 @@
         <ul class="sidebar-menu">
             <li class="active"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-home"></i>
                     <span>Dashboard</span></a></li>
+
+                    <li class="active"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-file"></i>
+                    <span>Profile Edit</span></a></li>
+
+                    <li class="active"><a class="nav-link" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span></a></li>
             {{-- <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-file"></i><span>Dropdown
                         Items</span></a>

@@ -14,6 +14,6 @@ class FrontController extends Controller
 
     public function about()
     {
-        return view('front.about');
+        return view('front.properties');
     }
 }
