@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function registration()
     {
-        return view('user.registration');
+        return view('user.auth.registration');
     }
 
     public function registration_submit(Request $request)
@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('user.login');
+        return view('user.auth.login');
     }
 
     public function login_submit(Request $request)
@@ -95,7 +95,7 @@ class UserController extends Controller
 
     public function forget_password()
     {
-        return view('user.forget_password');
+        return view('user.auth.forget_password');
     }
 
     public function forget_password_submit(Request $request)
@@ -130,7 +130,7 @@ class UserController extends Controller
         if(!$user){
             return redirect()->route('login')->with('error', 'Invalid token or email');
         }
-        return view('user.reset_password', compact('token', 'email'));
+        return view('user.auth.reset_password', compact('token', 'email'));
     }
 
     public function reset_password_submit(Request $request, $token, $email)

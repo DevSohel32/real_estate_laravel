@@ -335,8 +335,54 @@ namespace App\Models {
     /**
      * App\Models\Agent
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string $status
+     * @property string|null $token
+     * @property string|null $instagram
+     * @property string|null $twitter
+     * @property string|null $linkedin
+     * @property string|null $facebook
+     * @property string|null $website
+     * @property string|null $zip
+     * @property string|null $city
+     * @property string|null $state
+     * @property string|null $country
+     * @property string|null $address
+     * @property string|null $biography
+     * @property string|null $designation
+     * @property string|null $company
+     * @property string|null $phone
+     * @property string|null $photo
+     * @property string $password
+     * @property string $email
+     * @property string $name
+     * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereName($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereEmail($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent wherePassword($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent wherePhoto($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent wherePhone($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereCompany($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereDesignation($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereBiography($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereAddress($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereCountry($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereState($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereCity($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereZip($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereWebsite($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereFacebook($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereLinkedin($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereTwitter($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereInstagram($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereToken($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Agent>|Agent query()
@@ -653,12 +699,6 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string $status
      * @property string|null $token
-     * @property string|null $zip
-     * @property string|null $city
-     * @property string|null $state
-     * @property string|null $country
-     * @property string|null $address
-     * @property string|null $phone
      * @property string $password
      * @property string|null $photo
      * @property string $email
@@ -671,12 +711,6 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereEmail($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePhoto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePassword($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePhone($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereAddress($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCountry($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereState($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCity($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereZip($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereToken($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCreatedAt($value)

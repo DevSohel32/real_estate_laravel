@@ -10,22 +10,30 @@ use Illuminate\Database\Eloquent\Model;
 class Agent extends Authenticatable
 {
     use HasFactory, Notifiable;
-    //  protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'photo',
-    //     'password',
-    //     'phone',
-    //     'address',
-    //     'country',
-    //     'state',
-    //     'city',
-    //     'zip',
-    //     'token',
-    //     'status',
-    // ];
-    //  protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
+     protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'photo',
+        'phone',
+        'company',
+        'designation',
+        'biography',
+        'address',
+        'country',
+        'state',
+        'city',
+        'zip',
+        'website',
+        'facebook',
+        'linkedin',
+        'twitter',
+        'instagram',
+        'token',
+        'status',
+    ];
+     protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }

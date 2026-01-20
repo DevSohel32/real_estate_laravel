@@ -1,6 +1,16 @@
 @extends('front.layouts.master')
 
 @section('content')
+<div class="page-top" style="background-image: url('{{ asset('uploads/banner.jpg') }}')">
+        <div class="bg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Profile Edit</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page-content user-panel">
         <div class="container">
             <div class="row">

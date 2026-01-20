@@ -532,6 +532,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
+        'App\\Http\\Controllers\\Agent\\AgentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Front\\FrontController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/FrontController.php',
         'App\\Http\\Controllers\\User\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/UserController.php',
@@ -540,6 +541,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'App\\Http\\Middleware\\User' => __DIR__ . '/../..' . '/app/Http/Middleware/User.php',
         'App\\Mail\\Websitemail' => __DIR__ . '/../..' . '/app/Mail/Websitemail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
+        'App\\Models\\Agent' => __DIR__ . '/../..' . '/app/Models/Agent.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

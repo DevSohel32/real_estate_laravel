@@ -1,11 +1,11 @@
 @extends('front.layouts.master')
 @section('content')
-    <div class="page-top" style="background-image: url('uploads/banner.jpg')">
+    <div class="page-top" style="background-image: url('{{ asset('uploads/banner.jpg') }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Forget Password</h2>
+                    <h2>Forget Email</h2>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                     <div class="login-form">
-                        <form action="{{ route('forget_password_submit') }}" method="post">
+                        <form action="{{ route('agent_forget_password_submit') }}" method="post">
                             @csrf
                            
                             <div class="mb-3">
@@ -31,7 +31,7 @@
                         </form>
                         <div class="mb-3">
 
-                            <a href="{{ route('login') }}" class="primary-color">Back to Login Page</a>
+                            <a href="{{ route('agent_login') }}" class="primary-color">Back to Login Page</a>
                         </div>
                     </div>
                 </div>
@@ -40,25 +40,3 @@
     </div>
 
 @endsection
-
-
-{{-- <form action="{{ route('forget_password_submit') }}" method="post">
-    @csrf
-    <table>
-        <tr>
-            <td>Email:</td>
-            <td>
-                <input type="text" name="email" placeholder="Email">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <button type="submit">Submit</button>
-                <div>
-                    <a href="{{ route('login') }}">Back to Login Page</a>
-                </div>
-            </td>
-        </tr>
-    </table>
-</form> --}}

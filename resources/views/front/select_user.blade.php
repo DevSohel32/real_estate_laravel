@@ -38,8 +38,9 @@
                         </div>
                         <h3 class="fw-bold mb-3">Agent</h3>
                         <div class="d-grid gap-2">
-                            <a href="" class="btn btn-success">Agent Login</a>
-                            <a href="" class="btn btn-outline-success">Agent Registration</a>
+                            <a href="{{ route('agent_registration') }}" class="btn btn-outline-success">Agent Registration</a>
+                            <a href="{{ route('agent_login') }}" class="btn btn-success">Agent Login</a>
+                            
                         </div>
                     </div>
                 </div>
