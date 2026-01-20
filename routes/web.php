@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Admin\AdminPackagesController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
@@ -57,6 +58,11 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin_profile');
     Route::post('/profile', [AdminController::class, 'profile_submit'])->name('admin_profile_submit');
+    Route::get('/packages/index', [AdminPackagesController::class, 'index'])->name('admin_packages_index');
+    Route::get('/packages/create', [AdminPackagesController::class, 'create'])->name('admin_packages_create');
+    Route::post('/packages/store', [AdminPackagesController::class, 'store'])->name('admin_packages_store');
+    Route::get('/packages/edit/{id}', [AdminPackagesController::class, 'edit'])->name('admin_packages_edit');
+    Route::put('/packages/update', [AdminPackagesController::class, 'update'])->name('admin_packages_update');
 });
 
 Route::prefix('admin')->group(function(){
