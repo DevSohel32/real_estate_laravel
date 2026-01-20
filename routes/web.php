@@ -7,7 +7,8 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
-Route::get('/about', [FrontController::class, 'about'])->name('about');
+Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+Route::get('/select_user', [FrontController::class, 'select_user'])->name('select_user');
 
 // User
 Route::middleware('auth')->group(function(){

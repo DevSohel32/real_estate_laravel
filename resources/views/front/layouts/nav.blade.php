@@ -1,16 +1,16 @@
 <div class="main-nav">
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="uploads/logo.png" alt="">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ asset('uploads/logo.png') }}" alt="">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a href="index.html" class="nav-link">Home</a>
+                                <a href="{{ route('home') }}" class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('about') }}" class="nav-link">Properties</a>
+                                <a href="" class="nav-link">Properties</a>
                             </li>
                             <li class="nav-item">
                                 <a href="agents.html" class="nav-link">Agents</a>
@@ -28,10 +28,10 @@
                                 <a href="blog.html" class="nav-link">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Contact</a>
+                                <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a href="Login.html" class="nav-link">Login</a>
+                                <a href="{{ route('select_user') }}" class="nav-link">Login</a>
                             </li>
                         </ul>
                     </div>

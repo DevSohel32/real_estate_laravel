@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Hash;
-use Auth;
 use App\Models\User;
 use App\Mail\Websitemail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
         $subject = 'Registration Verification';
         $message = 'Click on the following link to verify your email: <br><a href="' . $link . '">' . $link . '</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
         return redirect()->back()->with('success', 'Registration successful. Please check your email to verify your account.');
     }
 
@@ -117,7 +118,7 @@ class UserController extends Controller
         $message = 'Click on the following link to reset your password: <br>';
         $message .= '<a href="'.$link.'">'.$link.'</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject,$message));
+        Mail::to($request->email)->send(new Websitemail($subject,$message));
 
         return redirect()->back()->with('success', 'Reset password link sent to your email');
 
@@ -183,12 +184,6 @@ class UserController extends Controller
         
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->state = $request->state;
-        $user->country = $request->country;
-        $user->zip = $request->zip;
         $user->update();
 
         return redirect()->back()->with('success', 'Profile updated successfully');

@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\Front\\FrontController' => $baseDir . '/app/Http/Controllers/Front/FrontController.php',
     'App\\Http\\Controllers\\User\\UserController' => $baseDir . '/app/Http/Controllers/User/UserController.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
+    'App\\Http\\Middleware\\Agent' => $baseDir . '/app/Http/Middleware/Agent.php',
     'App\\Http\\Middleware\\User' => $baseDir . '/app/Http/Middleware/User.php',
     'App\\Mail\\Websitemail' => $baseDir . '/app/Mail/Websitemail.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',

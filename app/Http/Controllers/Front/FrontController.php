@@ -12,8 +12,13 @@ class FrontController extends Controller
         return view('front.home');
     }
 
-    public function about()
+    public function contact()
     {
-        return view('front.properties');
+        return view('front.contact');
+    }
+
+    public function select_user()
+    {
+        return view('front.select_user');
     }
 }

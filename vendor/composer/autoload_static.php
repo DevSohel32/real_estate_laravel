@@ -536,6 +536,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'App\\Http\\Controllers\\Front\\FrontController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/FrontController.php',
         'App\\Http\\Controllers\\User\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/UserController.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
+        'App\\Http\\Middleware\\Agent' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent.php',
         'App\\Http\\Middleware\\User' => __DIR__ . '/../..' . '/app/Http/Middleware/User.php',
         'App\\Mail\\Websitemail' => __DIR__ . '/../..' . '/app/Mail/Websitemail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',

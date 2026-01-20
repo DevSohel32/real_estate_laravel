@@ -3,6 +3,7 @@
 <script src={{ asset('dist-front/js/jquery.magnific-popup.min.js') }}></script>
 <script src={{ asset('dist-front/js/wow.min.js') }}></script>
 <script src={{ asset('dist-front/js/select2.min.js') }}></script>
+<script src="{{ asset('dist-front/js/iziToast.min.js') }}"></script>
 <script src={{ asset('dist-front/js/jquery.waypoints.min.js') }}></script>
 <script src={{ asset('dist-front/js/moment.min.js') }}></script>
 <script src={{ asset('dist-front/js/dataTables.bootstrap5.min.js') }}></script>
