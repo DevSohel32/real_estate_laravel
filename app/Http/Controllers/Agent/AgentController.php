@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Models\Agent;
+use App\Models\Order;
+use App\Models\Package;
 use App\Mail\Websitemail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -219,5 +221,13 @@ class AgentController extends Controller
         $agent->update();
 
         return redirect()->back()->with('success', 'Profile updated successfully');
+    }
+
+
+
+    public function payment(){
+        $current_order = Order::where('agent_id',Auth::guard('agent')->user()->id)->where('currently_active' ,1)->first();
+        $packages = Package::orderBy('id','asc')->get();
+        return view('agent.payment.index',compact('packages','current_order'));
     }
 }

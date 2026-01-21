@@ -13,7 +13,7 @@
     <div class="page-content user-panel">
         <div class="container">
             <div class="row">
-               @include('agent.sidebar.index')
+                <div class="col-lg-3 col-md-12">@include('agent.sidebar.index')</div>
                 <div class="col-lg-9 col-md-12">
                     <h3>Hello, {{ Auth::guard('agent')->user()->name }}</h3>
                     <p>See all the statistics at a glance:</p>

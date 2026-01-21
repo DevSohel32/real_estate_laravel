@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <form action="{{ route('admin_type_store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Name</label>
                                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">

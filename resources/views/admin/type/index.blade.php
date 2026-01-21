@@ -23,9 +23,9 @@
                                     <table class="table table-bordered" id="example1">
                                         <thead>
                                             <tr>
-                                                <th>SL</th>
-                                                <th>Name</th>
-                                                <th>Action</th>
+                                                <th class="col-5">SL</th>
+                                                <th class="col-5">Name</th>
+                                                <th class="col-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Admin\AdminTypeController;
+use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminLocationController;
 
@@ -39,6 +40,7 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::get('/dashboard-agent', [AgentController::class, 'dashboard'])->name('agent_dashboard');
     Route::get('/profile', [AgentController::class, 'profile'])->name('agent_profile');
     Route::post('/profile', [AgentController::class, 'profile_submit'])->name('agent_profile_submit');
+    Route::get('/agent-payment', [AgentController::class, 'payment'])->name('agent_payment');
 });
 Route::prefix('agent')->group(function(){
 Route::get('/registration', [AgentController::class, 'registration'])->name('agent_registration');
@@ -81,6 +83,14 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/type/edit/{id}', [AdminTypeController::class, 'edit'])->name('admin_type_edit');
     Route::put('/type/update', [AdminTypeController::class, 'update'])->name('admin_type_update');
     Route::delete('/type/delete/{id}', [AdminTypeController::class, 'destroy'])->name('admin_type_deleted');
+    
+
+    Route::get('/amenity/index', [AdminAmenityController::class, 'index'])->name('admin_amenity_index');
+    Route::get('/amenity/create', [AdminAmenityController::class, 'create'])->name('admin_amenity_create');
+    Route::post('/amenity/store', [AdminAmenityController::class, 'store'])->name('admin_amenity_store');
+    Route::get('/amenity/edit/{id}', [AdminAmenityController::class, 'edit'])->name('admin_amenity_edit');
+    Route::put('/amenity/update', [AdminAmenityController::class, 'update'])->name('admin_amenity_update');
+    Route::delete('/amenity/delete/{id}', [AdminAmenityController::class, 'destroy'])->name('admin_amenity_deleted');
 
 });
 

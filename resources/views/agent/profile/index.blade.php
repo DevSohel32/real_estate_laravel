@@ -14,7 +14,10 @@
     <div class="page-content user-panel">
         <div class="container">
             <div class="row">
-                @include('user.layouts.sidebar')
+                 <div class="col-lg-3 col-md-12">
+                      @include('agent.sidebar.index')
+                 </div>
+             
                 <div class="col-lg-9 col-md-12">
                     <form action="{{ route('agent_profile_submit') }}" method="post" enctype="multipart/form-data">
                         @csrf

@@ -20,7 +20,7 @@
                                 @csrf
                                 @method('put')           
                                 <input type="hidden" name="id" value="{{ $type->id }}">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <label>Name</label>
                                             <input type="text" class="form-control" name="name" value="{{ old('name', $type->name) }}">
