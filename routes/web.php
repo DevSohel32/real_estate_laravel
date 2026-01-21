@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminLocationController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Admin\AdminTypeController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminLocationController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
@@ -73,6 +74,13 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/location/edit/{id}', [AdminLocationController::class, 'edit'])->name('admin_location_edit');
     Route::put('/location/update', [AdminLocationController::class, 'update'])->name('admin_location_update');
     Route::delete('/location/delete/{id}', [AdminLocationController::class, 'destroy'])->name('admin_location_deleted');
+
+    Route::get('/types/index', [AdminTypeController::class, 'index'])->name('admin_types_index');
+    Route::get('/type/create', [AdminTypeController::class, 'create'])->name('admin_type_create');
+    Route::post('/type/store', [AdminTypeController::class, 'store'])->name('admin_type_store');
+    Route::get('/type/edit/{id}', [AdminTypeController::class, 'edit'])->name('admin_type_edit');
+    Route::put('/type/update', [AdminTypeController::class, 'update'])->name('admin_type_update');
+    Route::delete('/type/delete/{id}', [AdminTypeController::class, 'destroy'])->name('admin_type_deleted');
 
 });
 

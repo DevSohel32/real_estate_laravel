@@ -7,11 +7,11 @@
         <section class="section">
             <div class="section-header d-flex justify-content-between">
                 <div>
-                    <h1>Location Management</h1>
+                    <h1>Type Management</h1>
                 </div>
                 <div class="ml-auto">
-                    <a href="{{ route('admin_location_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add
-                        Location</a>
+                    <a href="{{ route('admin_type_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add
+                        Type</a>
                 </div>
             </div>
             <div class="section-body">
@@ -24,44 +24,35 @@
                                         <thead>
                                             <tr>
                                                 <th>SL</th>
-                                                <th>photo</th>
                                                 <th>Name</th>
-                                                <th>slug</th>
-                                                <th>Total Properties</th>
                                                 <th>Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($locations as $location)
+                                            @foreach ($types as $type)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td><img src="{{ asset('uploads/' . $location->photo) }}" alt=""
-                                                            class="w_200"></td>
-                                                    <td>{{ $location->name }}</td>
-                                                    <td>{{ $location->slug }}</td>
-                                                    <td>{{ $location->total_properties }}</td>
+                                                    <td>{{ $type->name }}</td>
                                                     <td class="pt_10 pb_10">
-                                                        <a href="{{ route('admin_location_edit', ['id' => $location->id]) }}"
-                                                            class="btn btn-primary"><i class="fas fa-edit"></i></a>
-
+                                                        <a href="{{ route('admin_type_edit', ['id' => $type->id]) }}"
+                                                            class="btn btn-primary btn-xl">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
 
                                                         <form
-                                                            action="{{ route('admin_location_deleted', ['id' => $location->id]) }}"
-                                                            method="POST" id="delete-form-{{ $location->id }}"
+                                                            action="{{ route('admin_type_deleted', ['id' => $type->id]) }}"
+                                                            method="POST" id="delete-form-{{ $type->id }}"
                                                             style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="button" class="btn btn-danger"
-                                                                onclick="confirmDelete({{ $location->id }})">
+                                                            <button type="button" class="btn btn-danger btn-xl"
+                                                                onclick="confirmDelete({{ $type->id }})">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -86,12 +77,16 @@
             message: 'Are you sure you want to delete this package?',
             position: 'center',
             buttons: [
-                ['<button><b>YES</b></button>', function (instance, toast) {
-                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                ['<button><b>YES</b></button>', function(instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOut'
+                    }, toast, 'button');
                     document.getElementById('delete-form-' + id).submit();
                 }, true],
-                ['<button>NO</button>', function (instance, toast) {
-                    instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                ['<button>NO</button>', function(instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOut'
+                    }, toast, 'button');
                 }],
             ],
         });
