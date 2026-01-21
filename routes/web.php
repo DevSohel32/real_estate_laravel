@@ -4,13 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminLocationController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\Admin\AdminPackagesController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
 Route::get('/select_user', [FrontController::class, 'select_user'])->name('select_user');
+Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
 // User
 Route::middleware('auth')->group(function(){
@@ -58,11 +60,20 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin_profile');
     Route::post('/profile', [AdminController::class, 'profile_submit'])->name('admin_profile_submit');
-    Route::get('/packages/index', [AdminPackagesController::class, 'index'])->name('admin_packages_index');
-    Route::get('/packages/create', [AdminPackagesController::class, 'create'])->name('admin_packages_create');
-    Route::post('/packages/store', [AdminPackagesController::class, 'store'])->name('admin_packages_store');
-    Route::get('/packages/edit/{id}', [AdminPackagesController::class, 'edit'])->name('admin_packages_edit');
-    Route::put('/packages/update', [AdminPackagesController::class, 'update'])->name('admin_packages_update');
+    Route::get('/packages/index', [AdminPackageController::class, 'index'])->name('admin_packages_index');
+    Route::get('/package/create', [AdminPackageController::class, 'create'])->name('admin_package_create');
+    Route::post('/package/store', [AdminPackageController::class, 'store'])->name('admin_package_store');
+    Route::get('/package/edit/{id}', [AdminPackageController::class, 'edit'])->name('admin_package_edit');
+    Route::put('/package/update', [AdminPackageController::class, 'update'])->name('admin_package_update');
+    Route::delete('/package/delete/{id}', [AdminPackageController::class, 'destroy'])->name('admin_package_deleted');
+
+    Route::get('/locations/index', [AdminLocationController::class, 'index'])->name('admin_locations_index');
+    Route::get('/location/create', [AdminLocationController::class, 'create'])->name('admin_location_create');
+    Route::post('/location/store', [AdminLocationController::class, 'store'])->name('admin_location_store');
+    Route::get('/location/edit/{id}', [AdminLocationController::class, 'edit'])->name('admin_location_edit');
+    Route::put('/location/update', [AdminLocationController::class, 'update'])->name('admin_location_update');
+    Route::delete('/location/delete/{id}', [AdminLocationController::class, 'destroy'])->name('admin_location_deleted');
+
 });
 
 Route::prefix('admin')->group(function(){

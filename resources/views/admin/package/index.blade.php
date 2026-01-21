@@ -10,7 +10,7 @@
                     <h1>Packages</h1>
                 </div>
                 <div class="ml-auto">
-                    <a href="{{ route('admin_packages_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add
+                    <a href="{{ route('admin_package_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add
                         Package</a>
                 </div>
             </div>
@@ -58,11 +58,22 @@
                                                         {{ $package->allowed_videos == -1 ? 'Unlimited' : $package->allowed_videos }}
                                                     </td>
                                                     <td class="pt_10 pb_10">
-                                                        <a href="{{ route('admin_packages_edit', ['id' => $package->id]) }}"
+                                                        <a href="{{ route('admin_package_edit', ['id' => $package->id]) }}"
                                                             class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                        <a href="" class="btn btn-danger"
-                                                            onClick="return confirm('Are you sure?');"><i
-                                                                class="fas fa-trash"></i></a>
+
+
+                                                        <form action="{{ route('admin_package_deleted', ['id' => $package->id]) }}" 
+                                                        method="POST" 
+                                                        id="delete-form-{{ $package->id }}"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $package->id }})">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -79,3 +90,27 @@
         </section>
     </div>
 @endsection
+<script>
+    function confirmDelete(id) {
+    iziToast.question({
+        timeout: 20000,
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        id: 'question',
+        zindex: 999,
+        title: 'Wait!',
+        message: 'Are you sure you want to delete this package?',
+        position: 'center',
+        buttons: [
+            ['<button><b>YES</b></button>', function (instance, toast) {
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                document.getElementById('delete-form-' + id).submit();
+            }, true],
+            ['<button>NO</button>', function (instance, toast) {
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+            }],
+        ],
+    });
+}
+</script>

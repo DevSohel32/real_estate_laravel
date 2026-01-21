@@ -10,15 +10,24 @@
         <ul class="sidebar-menu">
             <li class="{{Request::is('admin/dashboard')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-home"></i>
                     <span>Dashboard</span></a></li>
-
-                    <li class="{{Request::is('admin/packages/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="fas fa-file"></i>
+                        <li class="nav-item dropdown active">
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder"></i><span>Property Section</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="active"><a class="nav-link" href="{{ route('admin_locations_index') }}"><i class="fas fa-location-arrow"> </i> Location</a></li>
+                                
+                            </ul>
+                        </li>
+                    <li class="{{Request::is('admin/packages/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="far fa-file"></i>
                     <span> Package </span></a></li>
-
-                    <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="fas fa-file"></i>
+                    <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
                     <span>Profile Edit</span></a></li>
 
                     <li class="{{Request::is('admin/logout') ? 'active': '' }}"><a class="nav-link" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a></li>
+
+
+
+                    
             {{-- <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-file"></i><span>Dropdown
                         Items</span></a>

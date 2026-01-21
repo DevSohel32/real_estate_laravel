@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin_packages_update') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('admin_package_update') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <input type="hidden" name="id" value="{{ $package->id }}">

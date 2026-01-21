@@ -532,7 +532,8 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
-        'App\\Http\\Controllers\\Admin\\AdminPackagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminPackagesController.php',
+        'App\\Http\\Controllers\\Admin\\AdminLocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminLocationController.php',
+        'App\\Http\\Controllers\\Admin\\AdminPackageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminPackageController.php',
         'App\\Http\\Controllers\\Agent\\AgentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Front\\FrontController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/FrontController.php',
@@ -543,6 +544,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'App\\Mail\\Websitemail' => __DIR__ . '/../..' . '/app/Mail/Websitemail.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Agent' => __DIR__ . '/../..' . '/app/Models/Agent.php',
+        'App\\Models\\Location' => __DIR__ . '/../..' . '/app/Models/Location.php',
         'App\\Models\\Package' => __DIR__ . '/../..' . '/app/Models/Package.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
