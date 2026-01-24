@@ -22,8 +22,12 @@
                         </li>
                     <li class="{{Request::is('admin/packages/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="far fa-file"></i>
                     <span> Package </span></a></li>
-                    <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
+                    <li class="{{Request::is('admin/customers/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_customers_index') }}"><i class="far fa-file"></i>
+                    <span>Customer</span></a></li>
+
+                     <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
                     <span>Profile Edit</span></a></li>
+
 
                     <li class="{{Request::is('admin/logout') ? 'active': '' }}"><a class="nav-link" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a></li>

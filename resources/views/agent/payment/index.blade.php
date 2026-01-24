@@ -20,13 +20,14 @@
                 </div>
                 <div class="col-lg-9 col-md-12">
                     <h4>Current Plan</h4>
-                    <div class="row box-items mb-4">
+                    <div class="row box-items mb-2">
                         @if($current_order)
                             <div class="col-md-4">
                                 <div class="box1">
                                     <h4>${{ $current_order->paid_amount }}</h4>
                                     <p>{{ $current_order->package->name ?? 'Package' }}</p>
-                                    <small class="text-muted">Expires on: {{ $current_order->expire_date }}</small>
+                                    <h6>({{ $days_left }} day remaining)</h6>
+                                    <span class="text-muted">Expires on: {{ $current_order->expire_date }}</span>
                                 </div>
                             </div>
                             @else
@@ -43,7 +44,7 @@
                         <table class="table table-bordered upgrade-plan-table">
                             <tr>
                                 <td>
-                                    <form action="" method="post">
+                                    <form action="{{ route('agent_paypal') }}" method="post">
                                         @csrf
                                     <select name="package_id" class="form-control select2">
                                         @foreach ($packages as $package)
@@ -52,14 +53,13 @@
                                     </select>
                                 </td>
                                 <td>
-
                                     <button type="submit" class="btn btn-secondary btn-sm buy-button">Pay with PayPal</button>
                                     </form>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <form action="" method="post">
+                                    <form action="{{ route('agent_stripe') }}" method="post">
                                     @csrf
                                     <select name="package_id" class="form-control select2">
                                         @foreach ($packages as $package)
@@ -68,8 +68,9 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-secondary btn-sm buy-button">Pay with Card</<button>
-                                        </form>
+                                    <button type="submit" class="btn btn-secondary btn-sm buy-button">Pay with Stripe</<button>
+                                        
+                                    </form>
                                 </td>
                             </tr>
                         </table>

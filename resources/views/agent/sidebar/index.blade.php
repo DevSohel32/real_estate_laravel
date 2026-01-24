@@ -6,8 +6,8 @@
         <li class="list-group-item {{ Request::is('agent/agent-payment') ? 'active' : '' }}">
             <a href="{{ route('agent_payment') }}">Make Payment</a>
         </li>
-        <li class="list-group-item">
-            <a href="user-orders.html">Orders</a>
+        <li class="list-group-item {{ Request::is('agent/order') ? 'active' : '' }}">
+            <a href="{{ route('agent_order') }}">Orders</a>
         </li>
         <li class="list-group-item">
             <a href="user-property-add.html">Add Property</a>

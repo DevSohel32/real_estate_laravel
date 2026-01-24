@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Admin\AdminTypeController;
 use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminLocationController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -40,7 +41,17 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::get('/dashboard-agent', [AgentController::class, 'dashboard'])->name('agent_dashboard');
     Route::get('/profile', [AgentController::class, 'profile'])->name('agent_profile');
     Route::post('/profile', [AgentController::class, 'profile_submit'])->name('agent_profile_submit');
+    Route::get('/order', [AgentController::class, 'order'])->name('agent_order');
+    Route::get('/invoice/{id}', [AgentController::class, 'invoice'])->name('agent_invoice');
     Route::get('/agent-payment', [AgentController::class, 'payment'])->name('agent_payment');
+
+    Route::post('/paypal', [AgentController::class, 'paypal'])->name('agent_paypal');
+    Route::get('/paypal-success', [AgentController::class, 'paypal_success'])->name('agent_paypal_success');
+    Route::get('/paypal-canceled', [AgentController::class, 'paypal_canceled'])->name('agent_paypal_canceled');
+     
+    Route::post('/stripe', [AgentController::class, 'stripe'])->name('agent_stripe');
+    Route::get('/stripe-success', [AgentController::class, 'stripe_success'])->name('agent_stripe_success');
+    Route::get('/stripe-canceled', [AgentController::class, 'stripe_canceled'])->name('agent_stripe_canceled');
 });
 Route::prefix('agent')->group(function(){
 Route::get('/registration', [AgentController::class, 'registration'])->name('agent_registration');
@@ -59,7 +70,7 @@ Route::get('/logout', [AgentController::class, 'logout'])->name('agent_logout');
 
 
 // Admin sections
-Route::middleware('admin')->prefix('admin')->group(function(){
+    Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin_profile');
     Route::post('/profile', [AdminController::class, 'profile_submit'])->name('admin_profile_submit');
@@ -76,6 +87,14 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/location/edit/{id}', [AdminLocationController::class, 'edit'])->name('admin_location_edit');
     Route::put('/location/update', [AdminLocationController::class, 'update'])->name('admin_location_update');
     Route::delete('/location/delete/{id}', [AdminLocationController::class, 'destroy'])->name('admin_location_deleted');
+      
+
+    Route::get('/customers/index', [AdminCustomerController::class, 'index'])->name('admin_customers_index');
+    Route::get('/customer/create', [AdminCustomerController::class, 'create'])->name('admin_customer_create');
+    Route::post('/customer/store', [AdminCustomerController::class, 'store'])->name('admin_customer_store');
+    Route::get('/customer/edit/{id}', [AdminCustomerController::class, 'edit'])->name('admin_customer_edit');
+    Route::put('/customer/update', [AdminCustomerController::class, 'update'])->name('admin_customer_update');
+    Route::delete('/customer/delete/{id}', [AdminCustomerController::class, 'destroy'])->name('admin_customer_deleted');
 
     Route::get('/types/index', [AdminTypeController::class, 'index'])->name('admin_types_index');
     Route::get('/type/create', [AdminTypeController::class, 'create'])->name('admin_type_create');

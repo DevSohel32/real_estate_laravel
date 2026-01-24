@@ -12,4 +12,8 @@ class Package extends Model
    public function order(){
     return $this->hasMany(Order::class);
    }
+   public function payments()
+   {
+      return $this->hasMany(Payment::class, 'product_name', 'name');
+   }
 }
