@@ -7,8 +7,8 @@
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
     <title>Admin Panel</title>
     @include('admin.layouts.style')
-
     @include('admin.layouts.script')
+    
 </head>
 
 <body>

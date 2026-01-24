@@ -40,10 +40,24 @@ class UserController extends Controller
         $user->token = $token;
         $user->save();
 
-        $link = url('registration-verify/'.$token.'/'.$request->email);
-        $subject = 'Registration Verification';
-        $message = 'Click on the following link to verify your email: <br><a href="' . $link . '">' . $link . '</a>';
+         $link = route('registration_verify', ['token' => $token, 'email' => $request->email]);
+        $subject = 'Action Required: Verify Your Email - TheHome Real Estate';
 
+        $message = "Hello " . $request->name . ",<br><br>";
+        $message .= "Thank you for registering with <strong>TheHome Real Estate</strong>! Before we get started, we need to verify that this is your email address.<br>";
+        $message .= "Please click the button below to confirm your registration and activate your account:<br><br>";
+
+        // Professional Call-to-Action Button
+        $message .= "<a href='" . $link . "' style='background: #007bff; color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;'>Verify My Email Address</a><br><br>";
+
+        $message .= "If the button above doesn't work, you can also copy and paste the following link into your browser:<br>";
+        $message .= "<a href='" . $link . "'>" . $link . "</a><br><br>";
+
+        $message .= "If you did not create an account with us, please ignore this email.<br><br>";
+        $message .= "Welcome aboard,<br>";
+        $message .= "<strong>TheHome Real Estate Team</strong>";
+
+        // Send the mail
         Mail::to($request->email)->send(new Websitemail($subject, $message));
         return redirect()->back()->with('success', 'Registration successful. Please check your email to verify your account.');
     }
@@ -113,12 +127,24 @@ class UserController extends Controller
         $user->token = $token;
         $user->update();
 
-        $link = route('reset_password', [$token,$request->email]);
-        $subject = 'Reset Password';
-        $message = 'Click on the following link to reset your password: <br>';
-        $message .= '<a href="'.$link.'">'.$link.'</a>';
+        // Building the Reset Password Email Message
+        $link = route('reset_password', [$token, $request->email]);
+        $subject = 'Reset Your Password - TheHome Real Estate';
 
-        Mail::to($request->email)->send(new Websitemail($subject,$message));
+        $message = "Hello,<br><br>";
+        $message .= "We received a request to reset the password for your <strong>TheHome Real Estate</strong> account.<br>";
+        $message .= "If you made this request, please click the button below to set a new password:<br><br>";
+
+        // Professional Call-to-Action Button
+        $message .= "<a href='" . $link . "' style='background: #dc3545; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;'>Reset Password</a><br><br>";
+        $message .= "<strong>Note:</strong> This password reset link will expire in 60 minutes for security reasons.<br><br>";
+        $message .= "If you did not request a password reset, no further action is required and your account remains secure.<br><br>";
+
+        $message .= "Regards,<br>";
+        $message .= "<strong>TheHome Real Estate Team</strong>";
+
+        // Send the mail
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
         return redirect()->back()->with('success', 'Reset password link sent to your email');
 

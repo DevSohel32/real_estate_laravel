@@ -48,10 +48,25 @@ class AgentController extends Controller
         $agent->token = $token;
         $agent->save();
 
+        // Building the Registration Verification Email Message
         $link = route('agent_registration_verify', ['token' => $token, 'email' => $request->email]);
-        $subject = 'Registration Verification';
-        $message = 'Click on the following link to verify your email: <br><a href="' . $link . '">' . $link . '</a>';
+        $subject = 'Action Required: Verify Your Email - TheHome Real Estate';
 
+        $message = "Hello " . $request->name . ",<br><br>";
+        $message .= "Thank you for registering with <strong>TheHome Real Estate</strong>! Before we get started, we need to verify that this is your email address.<br>";
+        $message .= "Please click the button below to confirm your registration and activate your account:<br><br>";
+
+        // Professional Call-to-Action Button
+        $message .= "<a href='" . $link . "' style='background: #007bff; color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;'>Verify My Email Address</a><br><br>";
+
+        $message .= "If the button above doesn't work, you can also copy and paste the following link into your browser:<br><br><br>";
+        $message .= "<a href='" . $link . "'>" . $link . "</a><br><br>";
+
+        $message .= "If you did not create an account with us, please ignore this email.<br><br>";
+        $message .= "Welcome aboard,<br>";
+        $message .= "<strong>TheHome Real Estate Team</strong>";
+
+        // Send the mail
         Mail::to($request->email)->send(new Websitemail($subject, $message));
         return redirect()->back()->with('success', 'Registration successful. Please check your email to verify your account.');
     }
@@ -121,11 +136,23 @@ class AgentController extends Controller
         $user->token = $token;
         $user->update();
 
+        // Building the Reset Password Email Message
         $link = route('agent_reset_password', [$token, $request->email]);
-        $subject = 'Reset Password';
-        $message = 'Click on the following link to reset your password: <br>';
-        $message .= '<a href="' . $link . '">' . $link . '</a>';
+        $subject = 'Reset Your Password - TheHome Real Estate';
 
+        $message = "Hello,<br><br>";
+        $message .= "We received a request to reset the password for your <strong>TheHome Real Estate</strong> account.<br>";
+        $message .= "If you made this request, please click the button below to set a new password:<br><br>";
+
+        // Professional Call-to-Action Button
+        $message .= "<a href='" . $link . "' style='background: #dc3545; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;'>Reset Password</a><br><br>";
+        $message .= "<strong>Note:</strong> This password reset link will expire in 60 minutes for security reasons.<br><br>";
+        $message .= "If you did not request a password reset, no further action is required and your account remains secure.<br><br>";
+
+        $message .= "Regards,<br>";
+        $message .= "<strong>TheHome Real Estate Team</strong>";
+
+        // Send the mail
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
         return redirect()->back()->with('success', 'Reset password link sent to your email');
@@ -230,16 +257,17 @@ class AgentController extends Controller
         $orders = Order::where('agent_id', $agent_id)->orderBy('id', 'desc')->get();
         return view('agent.order.index', compact('orders'));
     }
-   public function invoice($id){
+    public function invoice($id)
+    {
         $order = Order::with('package')->findOrFail($id);
-    return view('agent.order.invoice', compact('order'));
-   }
+        return view('agent.order.invoice', compact('order'));
+    }
     public function payment()
     {
         $current_order = Order::where('agent_id', Auth::guard('agent')->user()->id)->where('currently_active', 1)->first();
         $packages = Package::orderBy('id', 'asc')->get();
-        $days_left = (strtotime($current_order->expire_date)-strtotime(date('Y-m-d')))/(60*60*24);
-        return view('agent.payment.index', compact('packages', 'current_order','days_left'));
+        $days_left = (strtotime($current_order->expire_date) - strtotime(date('Y-m-d'))) / (60 * 60 * 24);
+        return view('agent.payment.index', compact('packages', 'current_order', 'days_left'));
     }
 
     public function paypal(Request $request)
@@ -310,21 +338,30 @@ class AgentController extends Controller
             $order->currently_active = 1;
             $order->save();
 
-            // Building the Email Message (Fixed Concatenation)
+            // Building the Email Message (Professional Format)
             $links = route('agent_order');
-            $subject = 'Payment successful';
+            $subject = 'Payment Confirmation - ' . $package_data->name;
 
-            $message = 'Your payment has been successfully processed.<br/>';
-            $message .= "Invoice No: " . $invoice_no . '<br/>';
-            $message .= "Transaction ID: " . $response['id'] . '<br/>';
-            $message .= "Package Name: " . $package_data->name . '<br/>';
-            $message .= "Paid Amount: " . $package_data->price . '<br/>';
-            $message .= "Purchase Date: " . date('Y-m-d') . '<br/>';
-            $message .= "Expire Date: " . date('Y-m-d', strtotime('+' . $package_data->allowed_days . ' days')) . '<br/><br/>';
-            $message .= "Click on the following link to view your order: <br/>";
-            $message .= '<a href="' . $links . '">' . $links . '</a>';
+            $message = "Dear " . $agent->name . ",<br><br>";
+            $message .= "Thank you for your purchase! We are pleased to inform you that your payment has been successfully processed.<br><br>";
 
-            // Send the mail using the authenticated user's email
+            $message .= "<strong>--- Transaction Details ---</strong><br>";
+            $message .= "<strong>Invoice No:</strong> " . $invoice_no . "<br>";
+            $message .= "<strong>Transaction ID:</strong> " . $response['id'] . "<br>";
+            $message .= "<strong>Package Name:</strong> " . $package_data->name . "<br>";
+            $message .= "<strong>Amount Paid:</strong> $" . number_format($package_data->price, 2) . "<br>";
+            $message .= "<strong>Payment Date:</strong> " . date('d M, Y') . "<br>";
+            $message .= "<strong>Expiry Date:</strong> " . date('d M, Y', strtotime('+' . $package_data->allowed_days . ' days')) . "<br>";
+            $message .= "---------------------------------------<br><br>";
+
+            $message .= "Your subscription is now active. You can manage your orders and view full invoice details by clicking the button below:<br><br>";
+            $message .= "<a href='" . $links . "' style='background: #28a745; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;'>View My Orders</a><br><br>";
+
+            $message .= "If you did not make this purchase, please contact our support team immediately.<br><br>";
+            $message .= "Best Regards,<br>";
+            $message .= "<strong>TheHome Real Estate Team</strong>";
+
+            // Send the mail
             Mail::to($agent->email)->send(new Websitemail($subject, $message));
 
             session()->forget('package_id');
@@ -358,8 +395,8 @@ class AgentController extends Controller
                 ],
             ],
             'mode' => 'payment',
-        'success_url' => route('agent_stripe_success') . '?session_id={CHECKOUT_SESSION_ID}',
-        'cancel_url' => route('agent_payment'),
+            'success_url' => route('agent_stripe_success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('agent_payment'),
         ]);
         if (isset($response['id']) && $response['id'] == '') {
             return redirect()->route('agent_payment')->with('error', 'Payment failed or was not completed. Please try again.');
@@ -399,27 +436,37 @@ class AgentController extends Controller
             $order->currently_active = 1;
             $order->save();
 
+            // Building the Email Message (Professional Format)
             $links = route('agent_order');
-            $subject = 'Payment successful';
+            $subject = 'Payment Confirmation - ' . $package_data->name;
 
-            $message = 'Your payment has been successfully processed.<br/>';
-            $message .= "Invoice No: " . $invoice_no . '<br/>';
-            $message .= "Transaction ID: " . $response['id'] . '<br/>';
-            $message .= "Package Name: " . $package_data->name . '<br/>';
-            $message .= "Paid Amount: " . $package_data->price . '<br/>';
-            $message .= "Purchase Date: " . date('Y-m-d') . '<br/>';
-            $message .= "Expire Date: " . date('Y-m-d', strtotime('+' . $package_data->allowed_days . ' days')) . '<br/><br/>';
-            $message .= "Click on the following link to view your order: <br/>";
-            $message .= '<a href="' . $links . '">' . $links . '</a>';
+            $message = "Dear " . $agent->name . ",<br><br>";
+            $message .= "Thank you for your purchase! We are pleased to inform you that your payment has been successfully processed.<br><br>";
 
-            // Send the mail using the authenticated user's email
+            $message .= "<strong>--- Transaction Details ---</strong><br>";
+            $message .= "<strong>Invoice No:</strong> " . $invoice_no . "<br>";
+            $message .= "<strong>Transaction ID:</strong> " . $response['id'] . "<br>";
+            $message .= "<strong>Package Name:</strong> " . $package_data->name . "<br>";
+            $message .= "<strong>Amount Paid:</strong> $" . number_format($package_data->price, 2) . "<br>";
+            $message .= "<strong>Payment Date:</strong> " . date('d M, Y') . "<br>";
+            $message .= "<strong>Expiry Date:</strong> " . date('d M, Y', strtotime('+' . $package_data->allowed_days . ' days')) . "<br>";
+            $message .= "---------------------------------------<br><br>";
+
+            $message .= "Your subscription is now active. You can manage your orders and view full invoice details by clicking the button below:<br><br>";
+            $message .= "<a href='" . $links . "' style='background: #28a745; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;'>View My Orders</a><br><br>";
+
+            $message .= "If you did not make this purchase, please contact our support team immediately.<br><br>";
+            $message .= "Best Regards,<br>";
+            $message .= "<strong>TheHome Real Estate Team</strong>";
+
+            // Send the mail
             Mail::to($agent->email)->send(new Websitemail($subject, $message));
 
             session()->forget('package_id');
 
             return redirect()->route('agent_order')->with('success', 'Payment recorded successfully!');
-        }else{
-        return redirect()->route('agent_payment')->with('error', 'Payment failed or was not completed. Please try again.');
+        } else {
+            return redirect()->route('agent_payment')->with('error', 'Payment failed or was not completed. Please try again.');
         }
     }
 }
