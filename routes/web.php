@@ -7,10 +7,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Admin\AdminTypeController;
+use App\Http\Controllers\Admin\AdminAgentController;
 use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminLocationController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
@@ -52,7 +54,16 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::post('/stripe', [AgentController::class, 'stripe'])->name('agent_stripe');
     Route::get('/stripe-success', [AgentController::class, 'stripe_success'])->name('agent_stripe_success');
     Route::get('/stripe-canceled', [AgentController::class, 'stripe_canceled'])->name('agent_stripe_canceled');
-});
+     
+    Route::get('/property/index', [AgentController::class, 'property'])->name('agent_property_index');
+    Route::get('/property/create', [AgentController::class, 'property_create'])->name('agent_property_create');
+    Route::post('/property/store', [AgentController::class, 'property_store'])->name('agent_property_store');
+    Route::get('/property/edit/{id}', [AgentController::class, 'property_edit'])->name('agent_property_edit');
+    Route::put('/property/update', [AgentController::class, 'property_update'])->name('agent_property_update');
+    Route::delete('/property/delete/{id}', [AgentController::class, 'destroy'])->name('agent_property_deleted');
+
+
+    });
 Route::prefix('agent')->group(function(){
 Route::get('/registration', [AgentController::class, 'registration'])->name('agent_registration');
 Route::post('/registration', [AgentController::class, 'registration_submit'])->name('agent_registration_submit');
@@ -96,6 +107,13 @@ Route::get('/logout', [AgentController::class, 'logout'])->name('agent_logout');
     Route::put('/customer/update', [AdminCustomerController::class, 'update'])->name('admin_customer_update');
     Route::delete('/customer/delete/{id}', [AdminCustomerController::class, 'destroy'])->name('admin_customer_deleted');
 
+    Route::get('/agents/index', [AdminAgentController::class, 'index'])->name('admin_agents_index');
+    Route::get('/agent/create', [AdminAgentController::class, 'create'])->name('admin_agent_create');
+    Route::post('/agent/store', [AdminAgentController::class, 'store'])->name('admin_agent_store');
+    Route::get('/agent/edit/{id}', [AdminAgentController::class, 'edit'])->name('admin_agent_edit');
+    Route::put('/agent/update', [AdminAgentController::class, 'update'])->name('admin_agent_update');
+    Route::delete('/agent/delete/{id}', [AdminAgentController::class, 'destroy'])->name('admin_agent_deleted');
+
     Route::get('/types/index', [AdminTypeController::class, 'index'])->name('admin_types_index');
     Route::get('/type/create', [AdminTypeController::class, 'create'])->name('admin_type_create');
     Route::post('/type/store', [AdminTypeController::class, 'store'])->name('admin_type_store');
@@ -111,7 +129,15 @@ Route::get('/logout', [AgentController::class, 'logout'])->name('agent_logout');
     Route::put('/amenity/update', [AdminAmenityController::class, 'update'])->name('admin_amenity_update');
     Route::delete('/amenity/delete/{id}', [AdminAmenityController::class, 'destroy'])->name('admin_amenity_deleted');
 
-});
+
+
+    Route::get('/order/index', [AdminOrderController::class, 'index'])->name('admin_order_index');
+    Route::get('/invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin_invoice');
+
+
+
+
+    });
 
 Route::prefix('admin')->group(function(){
     Route::get('/', function () {return redirect()->route('admin_login');});

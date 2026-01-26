@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Models\Type;
 use App\Models\Agent;
 use App\Models\Order;
+use App\Models\Amenity;
 use App\Models\Package;
+use App\Models\Location;
+use App\Models\Property;
 use App\Mail\Websitemail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -264,9 +268,19 @@ class AgentController extends Controller
     }
     public function payment()
     {
-        $current_order = Order::where('agent_id', Auth::guard('agent')->user()->id)->where('currently_active', 1)->first();
+        $agent_id = Auth::guard('agent')->user()->id;
+        $current_order = Order::where('agent_id', $agent_id)
+            ->where('currently_active', 1)
+            ->first();
+
         $packages = Package::orderBy('id', 'asc')->get();
-        $days_left = (strtotime($current_order->expire_date) - strtotime(date('Y-m-d'))) / (60 * 60 * 24);
+
+        $days_left = 0;
+        if ($current_order) {
+            $expiration = strtotime($current_order->expire_date);
+            $today = strtotime(date('Y-m-d'));
+            $days_left = ($expiration - $today) / (60 * 60 * 24);
+        }
         return view('agent.payment.index', compact('packages', 'current_order', 'days_left'));
     }
 
@@ -468,5 +482,148 @@ class AgentController extends Controller
         } else {
             return redirect()->route('agent_payment')->with('error', 'Payment failed or was not completed. Please try again.');
         }
+    }
+
+    public function property()
+    {
+        $properties = Property::where('agent_id', Auth::guard('agent')->user()->id)->get();
+        return view('agent.property.index', compact('properties'));
+    }
+
+    public function property_create()
+    {
+        $locations = Location::orderBy('id', 'asc')->get();
+        $types = Type::orderBy('id', 'asc')->get();
+        $amenities = Amenity::orderBy('id', 'asc')->get();
+
+        return view('agent.property.create', compact('locations', 'types', 'amenities'));
+    }
+
+    public function property_store(Request $request)
+    {
+        // 1. Validation
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:properties',
+            'price' => 'required',
+        ]);
+
+        $property = new Property();
+
+        if ($request->hasFile('featured_photo')) {
+            $request->validate([
+                'featured_photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $final_name = 'property_' . time() . '.' . $request->featured_photo->extension();
+            $request->featured_photo->move(public_path('uploads'), $final_name);
+            $property->featured_photo = $final_name;
+        }
+
+        // 3. Amenities Handling (Array to String)
+        if ($request->amenities != '') {
+            $amenities = implode(',', $request->amenities);
+        } else {
+            $amenities = '';
+        }
+
+        // 4. Saving Data
+        $property->agent_id = Auth::guard('agent')->user()->id;
+        $property->location_id = $request->location_id;
+        $property->type_id = $request->type_id;
+        $property->name = $request->name;
+        $property->slug = $request->slug;
+        $property->description = $request->description;
+        $property->price = $request->price;
+        $property->purpose = $request->purpose;
+        $property->bedroom = $request->bedroom;
+        $property->bathroom = $request->bathroom;
+        $property->size = $request->size;
+        $property->floor = $request->floor;
+        $property->garage = $request->garage;
+        $property->balcony = $request->balcony;
+        $property->address = $request->address;
+        $property->built_year = $request->built_year;
+        $property->map = $request->map;
+        $property->amenities = $amenities;
+        $property->status = "Pending";
+        $property->is_featured = 'No'; // Default value set korlam
+
+        $property->save();
+
+        return redirect()->route('agent_property_index')->with('success', 'Property added successfully!');
+    }
+    public function property_edit($id)
+    {
+        $property = Property::where('id', $id)->where('agent_id', Auth::guard('agent')->user()->id)->first();
+        if (!$property) {
+            return redirect()->back();
+        }
+        $locations = Location::orderBy('name', 'asc')->get();
+        $types = Type::orderBy('name', 'asc')->get();
+        $amenities = Amenity::orderBy('name', 'asc')->get();
+        return view('agent.property.edit', compact('property', 'locations', 'types', 'amenities'));
+    }
+    public function property_update(Request $request)
+    {
+        $request->validate([
+            'id'    => 'required',
+            'name'  => 'required',
+            'slug'  => 'required|unique:properties,slug,' . $request->id,
+            'price' => 'required',
+        ]);
+        $property = Property::findOrFail($request->id);
+
+        // 3. Image Update Logic
+        if ($request->hasFile('featured_photo')) {
+            $request->validate([
+                'featured_photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($property->featured_photo && file_exists(public_path('uploads/' . $property->featured_photo))) {
+                unlink(public_path('uploads/' . $property->featured_photo));
+            }
+
+            $final_name = 'property_' . time() . '.' . $request->featured_photo->extension();
+            $request->featured_photo->move(public_path('uploads'), $final_name);
+            $property->featured_photo = $final_name;
+        }
+        $amenities = $request->amenities ? implode(',', $request->amenities) : '';
+        $property->location_id = $request->location_id;
+        $property->type_id     = $request->type_id;
+        $property->name        = $request->name;
+        $property->slug        = $request->slug;
+        $property->description = $request->description;
+        $property->price       = $request->price;
+        $property->purpose     = $request->purpose;
+        $property->bedroom     = $request->bedroom;
+        $property->bathroom    = $request->bathroom;
+        $property->size        = $request->size;
+        $property->floor       = $request->floor;
+        $property->garage      = $request->garage;
+        $property->balcony     = $request->balcony;
+        $property->address     = $request->address;
+        $property->built_year  = $request->built_year;
+        $property->map         = $request->map;
+        $property->amenities   = $amenities;
+        $property->update();
+
+        return redirect()->route('agent_property_index')->with('success', 'Property updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+
+        $property = Property::findOrFail($id);
+
+        if ($property->agent_id != Auth::guard('agent')->user()->id) {
+            return redirect()->back()->with('error', 'Unauthorized action!');
+        }
+
+
+        if ($property->featured_photo && file_exists(public_path('uploads/' . $property->featured_photo))) {
+            unlink(public_path('uploads/' . $property->featured_photo));
+        }
+        $property->delete();
+
+        return redirect()->back()->with('success', 'Property deleted successfully!');
     }
 }

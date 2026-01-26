@@ -64,31 +64,4 @@
         </section>
     </div>
 @endsection
-<script>
-    function confirmDelete(id) {
-        iziToast.question({
-            timeout: 20000,
-            close: false,
-            overlay: true,
-            displayMode: 'once',
-            id: 'question',
-            zindex: 999,
-            title: 'Wait!',
-            message: 'Are you sure you want to delete this package?',
-            position: 'center',
-            buttons: [
-                ['<button><b>YES</b></button>', function(instance, toast) {
-                    instance.hide({
-                        transitionOut: 'fadeOut'
-                    }, toast, 'button');
-                    document.getElementById('delete-form-' + id).submit();
-                }, true],
-                ['<button>NO</button>', function(instance, toast) {
-                    instance.hide({
-                        transitionOut: 'fadeOut'
-                    }, toast, 'button');
-                }],
-            ],
-        });
-    }
-</script>
+

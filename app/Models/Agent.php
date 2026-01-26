@@ -13,6 +13,10 @@ class Agent extends Authenticatable
     public function order(){
         return $this->hasMany(Order::class);
     }
+    public function property(){
+        return $this->hasMany(Property::class);
+    }
+
 
     //  protected $fillable = [
     //     'name',

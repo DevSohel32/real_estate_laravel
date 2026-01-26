@@ -10,7 +10,7 @@
         <ul class="sidebar-menu">
             <li class="{{Request::is('admin/dashboard')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-home"></i>
                     <span>Dashboard</span></a></li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder"></i><span>Property Section</span></a>
                             <ul class="dropdown-menu">
                                 <li class="{{Request::is('admin/location/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_locations_index') }}"><i class="fas fa-angle-right"> </i> Location</a></li>
@@ -22,8 +22,16 @@
                         </li>
                     <li class="{{Request::is('admin/packages/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="far fa-file"></i>
                     <span> Package </span></a></li>
+
                     <li class="{{Request::is('admin/customers/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_customers_index') }}"><i class="far fa-file"></i>
-                    <span>Customer</span></a></li>
+                         <span>Customer</span></a></li>
+
+                    <li class="{{Request::is('admin/orders/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_order_index') }}"><i class="far fa-file"></i>
+                    <span>Order</span></a></li>
+
+
+                    <li class="{{Request::is('admin/agents/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_agents_index') }}"><i class="far fa-file"></i>
+                    <span>Agent</span></a></li>
 
                      <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
                     <span>Profile Edit</span></a></li>

@@ -80,3 +80,54 @@
     });
 
 })(jQuery);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.querySelector('input[name="name"]');
+    const slugInput = document.querySelector('input[name="slug"]');
+
+    if (nameInput && slugInput) {
+        nameInput.addEventListener('keyup', function() {
+            let name = this.value;
+            let slug = name.toLowerCase()
+                           .replace(/ /g, '-')          
+                           .replace(/[^\w-]+/g, '')     
+                           .replace(/-+$/, '');         
+
+            slugInput.value = slug;
+        });
+    }
+});
+
+$(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+
+    function confirmDelete(id) {
+    iziToast.question({
+        timeout: 20000,
+        close: false,
+        overlay: true,
+        displayMode: 'once',
+        id: 'question',
+        zindex: 999,
+        title: 'Wait!',
+        message: 'Are you sure you want to delete this package?',
+        position: 'center',
+        buttons: [
+            ['<button><b>YES</b></button>', function (instance, toast) {
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                document.getElementById('delete-form-' + id).submit();
+            }, true],
+            ['<button>NO</button>', function (instance, toast) {
+                instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+            }],
+        ],
+    });
+}

@@ -9,11 +9,11 @@
         <li class="list-group-item {{ Request::is('agent/order') ? 'active' : '' }}">
             <a href="{{ route('agent_order') }}">Orders</a>
         </li>
-        <li class="list-group-item">
-            <a href="user-property-add.html">Add Property</a>
+        <li class="list-group-item {{ Request::is('agent/property/create') ? 'active' : '' }}">
+            <a href="{{ route('agent_property_create') }}">Add Property</a>
         </li>
-        <li class="list-group-item">
-            <a href="user-properties.html">All Properties</a>
+        <li class="list-group-item {{ Request::is('agent/property') ? 'active' : '' }}">
+            <a href="{{ route('agent_property_index') }}">All Properties</a>
         </li>
         <li class="list-group-item">
             <a href="user-orders.html">Messages</a>
