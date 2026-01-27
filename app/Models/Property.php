@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Type;
 use App\Models\Agent;
 use App\Models\Location;
+use App\Models\PropertyPhoto;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
@@ -26,5 +27,8 @@ protected $fillable = [
     }
     public function type(){
         return $this->belongsTo(Type::class);
+    }
+    public function photos(){
+        return $this->hasMany(PropertyPhoto::class);
     }
 }

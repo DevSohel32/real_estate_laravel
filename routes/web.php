@@ -61,7 +61,11 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::get('/property/edit/{id}', [AgentController::class, 'property_edit'])->name('agent_property_edit');
     Route::put('/property/update', [AgentController::class, 'property_update'])->name('agent_property_update');
     Route::delete('/property/delete/{id}', [AgentController::class, 'destroy'])->name('agent_property_deleted');
+    
 
+    Route::get('/property/photo-gallery/{id}', [AgentController::class, 'photo_gallery'])->name('agent_property_photo_gallery');
+    Route::post('/property/photo-gallery/store/{id}', [AgentController::class, 'photo_gallery_store'])->name('agent_property_photo_gallery_store');
+     Route::delete('/property/photo-gallery/store/{id}', [AgentController::class, 'photo_gallery_delete'])->name('agent_property_photo_gallery_delete');
 
     });
 Route::prefix('agent')->group(function(){

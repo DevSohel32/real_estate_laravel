@@ -45,7 +45,7 @@
                                                 <span class="badge bg-secondary">Expired</span>
                                             @endif
                                         </td>
-                                        <td>{{ $item->package->name }}</td>
+                                        <td>{{ $item->package?->name ?? 'Package Not Found' }}</td>
                                         <td>${{ number_format($item->paid_amount, 2) }}</td>
                                         <td>{{ $item->purchase_date }}</td>
                                         <td>{{ $item->expire_date }}</td>

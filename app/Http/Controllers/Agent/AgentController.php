@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Mail\Websitemail;
 use Illuminate\Http\Request;
+use App\Models\PropertyPhoto;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -625,5 +626,57 @@ class AgentController extends Controller
         $property->delete();
 
         return redirect()->back()->with('success', 'Property deleted successfully!');
+    }
+
+
+
+    public function photo_gallery($id)
+    {
+        $property = Property::where('id', $id)->where("agent_id",  Auth::guard('agent')->user()->id)->first();
+        $photos = PropertyPhoto::where('property_id', $id)->get();
+        if (!$property) {
+            return redirect()->back()->with('error', 'Property not found');
+        }
+        return view('agent.property.photo_gallery', compact('property', 'photos'));
+    }
+
+
+    public function photo_gallery_store(Request $request, $id)
+    {
+        $property = Property::where('id', $id)
+            ->where('agent_id', Auth::guard('agent')->user()->id)
+            ->first();
+
+        if (!$property) {
+            return redirect()->back()->with('error', 'Property not found');
+        }
+
+        // 2. Validate the uploaded file
+        $request->validate([
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
+
+        $obj = new PropertyPhoto();
+
+        $final_name = 'property_photo_' . time() . '.' . $request->photo->extension();
+        $request->photo->move(public_path('uploads'), $final_name);
+
+        // 5. Save the relation and the filename
+        $obj->property_id = $property->id;
+        $obj->photo = $final_name;
+        $obj->save();
+
+        return redirect()->back()->with('success', 'Photo added successfully');
+    }
+    public function photo_gallery_delete($id)
+    {
+        $photo = PropertyPhoto::findOrFail($id);
+        $file_path = public_path('uploads/' . $photo->photo);
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+        $photo->delete();
+
+        return redirect()->back()->with('success', 'Photo deleted successfully');
     }
 }
