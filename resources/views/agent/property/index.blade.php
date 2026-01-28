@@ -57,7 +57,7 @@
                                         <td>
                                             <a href="{{ route('agent_property_photo_gallery',['id' => $property->id]) }}" class="btn btn-primary btn-sm w-105 mb-2">Photo
                                                 Gallery</a>
-                                            <a href="" class="btn btn-primary btn-sm w-105 mb_5">Video
+                                            <a href="{{ route('agent_property_video_gallery',['id' => $property->id]) }}" class="btn btn-primary btn-sm w-105 mb_5">Video
                                                 Gallery</a>
                                         </td>
                                         <td class="pt_10 pb_10">

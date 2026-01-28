@@ -6,13 +6,14 @@
         <li class="list-group-item {{ Request::is('agent/agent-payment') ? 'active' : '' }}">
             <a href="{{ route('agent_payment') }}">Make Payment</a>
         </li>
-        <li class="list-group-item {{ Request::is('agent/order') ? 'active' : '' }}">
+        <li class="list-group-item {{ Request::is('agent/order')||Request::is('agent/invoice/*') ? 'active' : '' }}">
             <a href="{{ route('agent_order') }}">Orders</a>
         </li>
         <li class="list-group-item {{ Request::is('agent/property/create') ? 'active' : '' }}">
             <a href="{{ route('agent_property_create') }}">Add Property</a>
         </li>
-        <li class="list-group-item {{ Request::is('agent/property') ? 'active' : '' }}">
+        <li
+            class="list-group-item {{ Request::is('/agent/properties/*') || Request::is('agent/property/photo-gallery/*') || Request::is('agent/property/video-gallery/*') ? 'active' : '' }}">
             <a href="{{ route('agent_property_index') }}">All Properties</a>
         </li>
         <li class="list-group-item">

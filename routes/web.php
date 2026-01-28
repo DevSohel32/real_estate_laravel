@@ -55,7 +55,7 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::get('/stripe-success', [AgentController::class, 'stripe_success'])->name('agent_stripe_success');
     Route::get('/stripe-canceled', [AgentController::class, 'stripe_canceled'])->name('agent_stripe_canceled');
      
-    Route::get('/property/index', [AgentController::class, 'property'])->name('agent_property_index');
+    Route::get('/properties/index', [AgentController::class, 'property'])->name('agent_property_index');
     Route::get('/property/create', [AgentController::class, 'property_create'])->name('agent_property_create');
     Route::post('/property/store', [AgentController::class, 'property_store'])->name('agent_property_store');
     Route::get('/property/edit/{id}', [AgentController::class, 'property_edit'])->name('agent_property_edit');
@@ -66,6 +66,12 @@ Route::middleware('agent')->prefix('agent')->group(function(){
     Route::get('/property/photo-gallery/{id}', [AgentController::class, 'photo_gallery'])->name('agent_property_photo_gallery');
     Route::post('/property/photo-gallery/store/{id}', [AgentController::class, 'photo_gallery_store'])->name('agent_property_photo_gallery_store');
      Route::delete('/property/photo-gallery/store/{id}', [AgentController::class, 'photo_gallery_delete'])->name('agent_property_photo_gallery_delete');
+
+      Route::get('/property/video-gallery/{id}', [AgentController::class, 'video_gallery'])->name('agent_property_video_gallery');
+
+       Route::post('/property/video-gallery/store/{id}', [AgentController::class, 'video_gallery_store'])->name('agent_property_video_gallery_store');
+
+        Route::delete('/property/video-gallery/delete/{id}', [AgentController::class, 'video_gallery_delete'])->name('agent_property_video_gallery_delete');
 
     });
 Route::prefix('agent')->group(function(){

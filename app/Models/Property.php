@@ -31,4 +31,7 @@ protected $fillable = [
     public function photos(){
         return $this->hasMany(PropertyPhoto::class);
     }
+    public function videos(){
+        return $this->hasMany(PropertyVideo::class);
+    }
 }

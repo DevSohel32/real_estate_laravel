@@ -12,6 +12,7 @@ use App\Models\Property;
 use App\Mail\Websitemail;
 use Illuminate\Http\Request;
 use App\Models\PropertyPhoto;
+use App\Models\PropertyVideo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -678,5 +679,61 @@ class AgentController extends Controller
         $photo->delete();
 
         return redirect()->back()->with('success', 'Photo deleted successfully');
+    }
+
+    public function video_gallery($id)
+    {
+        $property = Property::where('id', $id)->where("agent_id",  Auth::guard('agent')->user()->id)->first();
+        $videos = PropertyVideo::where('property_id', $id)->get();
+        if (!$property) {
+            return redirect()->back()->with('error', 'Property not found');
+        }
+        return view('agent.property.video_gallery', compact(
+            'property',
+            'videos'
+        ));
+    }
+
+    public function video_gallery_store(Request $request, $id)
+    {
+        $property = Property::where('id', $id)
+            ->where('agent_id', Auth::guard('agent')->user()->id)
+            ->first();
+
+        if (!$property) {
+            return redirect()->back()->with('error', 'Property not found');
+        }
+
+        // Validate as a string/text, not an image
+        $request->validate([
+            'video' => ['required', 'string', 'max:255'],
+        ]);
+
+        $obj = new PropertyVideo();
+        $obj->property_id = $property->id;
+
+        // Save the YouTube ID directly (e.g., "dQw4w9WgXcQ")
+        $obj->video = $request->video;
+        $obj->save();
+
+        return redirect()->back()->with('success', 'Video added successfully');
+    }
+
+    public function video_gallery_delete($id)
+    {
+        $video_item = PropertyVideo::findOrFail($id);
+
+
+        $property = Property::where('id', $video_item->property_id)
+            ->where('agent_id', Auth::guard('agent')->user()->id)
+            ->first();
+
+        if (!$property) {
+            return redirect()->back()->with('error', 'Unauthorized action or video not found.');
+        }
+
+        $video_item->delete();
+
+        return redirect()->back()->with('success', 'Video deleted successfully');
     }
 }

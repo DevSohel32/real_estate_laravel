@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Photo Gallery</h2>
+                    <h2>Video Gallery</h2>
                 </div>
             </div>
         </div>
@@ -18,15 +18,14 @@
                     @include('agent.sidebar.index')
                 </div>
                 <div class="col-lg-9 col-md-12">
-                    <h4>Add Photo</h4>
-                    <form action="{{ route('agent_property_photo_gallery_store', ['id' => $property->id]) }}" method="post"
-                        enctype="multipart/form-data">
+                    <h4>Add video</h4>
+                    <form action="{{ route('agent_property_video_gallery_store', ['id' => $property->id]) }}" method="post">
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <input type="file" name="photo" />
+                                    <input type="text" name="video" class="form-control" placeholder="Youtube video Id" />
                                 </div>
                             </div>
                         </div>
@@ -38,16 +37,16 @@
                         </div>
                     </form>
 
-                    <h4 class="mt-4">Existing Photos</h4>
-                    <div class="photo-all">
+                    <h4 class="mt-4">Existing videos</h4>
+                    <div class="video-all">
                         <div class="row">
-                            @foreach ($photos as $item)
+                            @foreach ($videos as $item)
                                 <div class="col-md-6 col-lg-3">
                                     <div class="item item-delete">
-                                        <a href="{{ asset('uploads/' . $item->photo)}}" class="magnific">
-                                            <img src="{{ asset('uploads/' . $item->photo)}}" alt="" />
+                                        <a class="video-button" href="http://www.youtube.com/watch?v={{ $item->video }}">
+                                            <img src="http://img.youtube.com/vi/{{ $item->video }}/0.jpg" alt="" />
                                             <div class="icon">
-                                                <i class="fas fa-plus"></i>
+                                                <i class="far fa-play-circle"></i>
                                             </div>
                                             <div class="bg"></div>
                                         </a>
@@ -56,7 +55,7 @@
                                         onClick="confirmDelete({{ $item->id }})">Delete</a>
 
                                     <form id="delete-form-{{ $item->id }}"
-                                        action="{{ route('agent_property_photo_gallery_delete', $item->id) }}" method="POST"
+                                        action="{{ route('agent_property_video_gallery_delete', $item->id) }}" method="POST"
                                         style="display: none;">
                                         @csrf
                                         @method('DELETE')
