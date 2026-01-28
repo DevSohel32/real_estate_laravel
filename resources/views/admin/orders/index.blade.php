@@ -52,7 +52,6 @@
                                                     <td style="word-wrap: break-word; word-break: break-all;">
                                                         <b class="text-uppercase"> {{ $item->payment_method }}</b> <br />
                                                         {{ $item->transaction_id }}
-
                                                     </td>
                                                     <td class="text-success">{{ $item->status }}</td>
                                                     <td>
@@ -61,8 +60,6 @@
                                                             <i class="fas fa-print"></i>
                                                         </a>
                                                     </td>
-
-
                                                 </tr>
                                             @endforeach
                                         </tbody>

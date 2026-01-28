@@ -52,11 +52,11 @@ class AdminLocationController extends Controller
         return redirect()->route('admin_locations_index')->with('success', 'Location created successfully!');
     }
 
-public function edit($id)
-{
-    $location = Location::findOrFail($id);
-    return view('admin.location.edit', compact('location'));
-}
+    public function edit($id)
+    {
+        $location = Location::findOrFail($id);
+        return view('admin.location.edit', compact('location'));
+    }
 
 
     public function update(Request $request)
@@ -94,13 +94,14 @@ public function edit($id)
 
     public function destroy($id)
     {
-       $location = Location::findOrFail($id);
+        $location = Location::findOrFail($id);
 
-    if ($location->photo && file_exists(public_path('uploads/' . $location->photo))) {
-        unlink(public_path('uploads/' . $location->photo));
+        if ($location->photo && file_exists(public_path('uploads/' . $location->photo))) {
+            unlink(public_path('uploads/' . $location->photo));
+        }
+
+        $location->delete();
+
+        return redirect()->back()->with('success', 'Location deleted successfully');
     }
-
-    $location->delete();
-
-    return redirect()->back()->with('success', 'Location deleted successfully');}
 }

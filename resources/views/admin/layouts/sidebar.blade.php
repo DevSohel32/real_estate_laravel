@@ -8,41 +8,64 @@
         </div>
 
         <ul class="sidebar-menu">
-            <li class="{{Request::is('admin/dashboard')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-home"></i>
+            <li class="{{Request::is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_dashboard') }}"><i class="fas fa-home"></i>
                     <span>Dashboard</span></a></li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder"></i><span>Property Section</span></a>
-                            <ul class="dropdown-menu">
-                                <li class="{{Request::is('admin/location/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_locations_index') }}"><i class="fas fa-angle-right"> </i> Location</a></li>
-                                 <li class="{{Request::is('admin/types/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_types_index') }}"><i class="fas fa-angle-right"> </i> Type</a></li>
-                                 <li class="{{Request::is('admin/amenity/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_amenity_index') }}"><i class="fas fa-angle-right"> </i> Amenity</a></li>
-                                 
-                                
-                            </ul>
-                        </li>
-                    <li class="{{Request::is('admin/packages/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="far fa-file"></i>
+
+
+
+            <li class="nav-item dropdown {{ Request::is('admin/location/*') || Request::is('admin/types/*')||  Request::is('admin/amenity/*') || Request::is('admin/property/*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder"></i><span>Property Section</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{Request::is('admin/location/*') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_locations_index') }}"><i class="fas fa-angle-right"> </i> Location</a>
+                    </li>
+                    <li class="{{ Request::is('admin/types/*') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_types_index') }}"><i class="fas fa-angle-right"> </i> Type</a></li>
+                    <li class="{{ Request::is('admin/amenity/*') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_amenity_index') }}"><i class="fas fa-angle-right"> </i> Amenity</a>
+                    </li>
+
+                    <li
+                        class="{{ Request::is('admin/property/*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin_property_index') }}"><i class="fas fa-angle-right">
+                            </i> Property</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+
+            <li class="{{ Request::is('admin/packages/*') || Request::is('admin/package/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_packages_index') }}"><i class="far fa-file"></i>
                     <span> Package </span></a></li>
 
-                    <li class="{{Request::is('admin/customers/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_customers_index') }}"><i class="far fa-file"></i>
-                         <span>Customer</span></a></li>
+            <li class="{{ Request::is('admin/customers/*')||Request::is('admin/customer/edit/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_customers_index') }}"><i class="far fa-file"></i>
+                    <span>Customer</span></a></li>
 
-                    <li class="{{Request::is('admin/orders/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_order_index') }}"><i class="far fa-file"></i>
+            <li class="{{ Request::is('admin/order/*') || Request::is('admin/invoice/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_order_index') }}"><i class="far fa-file"></i>
                     <span>Order</span></a></li>
 
 
-                    <li class="{{Request::is('admin/agents/*')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_agents_index') }}"><i class="far fa-file"></i>
+            <li class="{{ Request::is('admin/agents/*') || Request::is('admin/agent/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_agents_index') }}"><i class="far fa-file"></i>
                     <span>Agent</span></a></li>
 
-                     <li class="{{Request::is('admin/profile')? 'active': '' }}"><a class="nav-link" href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
+            <li class="{{Request::is('admin/profile') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_profile') }}"><i class="far fa-file"></i>
                     <span>Profile Edit</span></a></li>
 
 
-                    <li class="{{Request::is('admin/logout') ? 'active': '' }}"><a class="nav-link" href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>
+            <li class="{{Request::is('admin/logout') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span></a></li>
 
 
 
-                    
+
             {{-- <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-file"></i><span>Dropdown
                         Items</span></a>
@@ -52,15 +75,15 @@
                 </ul>
             </li>
             <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-file"></i>
-                <span>Setting</span></a></li>
+                    <span>Setting</span></a></li>
 
             <li class=""><a class="nav-link" href="form.html"><i class="fas fa-file"></i>
-                <span>Form</span></a></li>
+                    <span>Form</span></a></li>
 
             <li class=""><a class="nav-link" href="table.html"><i class="fas fa-file"></i>
-                <span>Table</span></a></li>
+                    <span>Table</span></a></li>
             <li class=""><a class="nav-link" href="invoice.html"><i class="fas fa-file"></i>
-                <span>Invoice</span></a></li> --}}
+                    <span>Invoice</span></a></li> --}}
 
         </ul>
     </aside>

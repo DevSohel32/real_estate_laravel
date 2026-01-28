@@ -8,11 +8,12 @@ use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Admin\AdminTypeController;
 use App\Http\Controllers\Admin\AdminAgentController;
+use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminAmenityController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminLocationController;
-use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminPropertyController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
@@ -138,6 +139,14 @@ Route::get('/logout', [AgentController::class, 'logout'])->name('agent_logout');
     Route::get('/amenity/edit/{id}', [AdminAmenityController::class, 'edit'])->name('admin_amenity_edit');
     Route::put('/amenity/update', [AdminAmenityController::class, 'update'])->name('admin_amenity_update');
     Route::delete('/amenity/delete/{id}', [AdminAmenityController::class, 'destroy'])->name('admin_amenity_deleted');
+
+
+
+
+     Route::get('/property/index', [AdminPropertyController::class, 'index'])->name('admin_property_index');
+    Route::get('/property/edit/{id}', [AdminPropertyController::class, 'edit'])->name('admin_property_edit');
+    Route::put('/property/update', [AdminPropertyController::class, 'update'])->name('admin_property_update');
+    Route::get('/property/detail/{id}', [AdminPropertyController::class, 'details'])->name('admin_property_details');
 
 
 

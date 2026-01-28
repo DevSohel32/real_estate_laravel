@@ -36,21 +36,3 @@
         </section>
     </div>
 @endsection
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const nameInput = document.querySelector('input[name="name"]');
-    const slugInput = document.querySelector('input[name="slug"]');
-
-    if (nameInput && slugInput) {
-        nameInput.addEventListener('keyup', function() {
-            let name = this.value;
-            let slug = name.toLowerCase()
-                           .replace(/ /g, '-')          
-                           .replace(/[^\w-]+/g, '')     
-                           .replace(/-+$/, '');         
-
-            slugInput.value = slug;
-        });
-    }
-});
-</script>
