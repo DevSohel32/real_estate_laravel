@@ -6,7 +6,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header justify-content-between">
-                <h1>cu tomeradd</h1>
+                <h1>Customer add</h1>
                 <div class="ml-auto">
                     <a href="{{ route('admin_customers_index') }}" class="btn btn-primary"><i class="fas fa-eye"></i> View
                         All</a>

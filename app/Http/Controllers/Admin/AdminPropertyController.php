@@ -18,8 +18,8 @@ class AdminPropertyController extends Controller
 
     public function details($id)
     {
-        $properties = Property::orderBy('id', 'asc')->get();
-        return view('admin.property.detail', compact('properties'));
+        $property = Property::where('id', $id)->first();
+        return view('admin.property.detail', compact('property'));
     }
 
 
@@ -34,7 +34,7 @@ class AdminPropertyController extends Controller
     {
         $request->validate([
             'id' => 'required|exists:properties,id',
-            'status' => 'required|unique:properties|max:255',
+            'status' => 'required|',
         ]);
 
         $property = Property::findOrFail($request->id);

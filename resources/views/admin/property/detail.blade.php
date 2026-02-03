@@ -7,7 +7,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1><i class="fas fa-home mr-2 text-primary"></i> Property Details</h1>
+                <h1><i class="fas fa-home mr-2 text-primary"></i> {{ $property->name }} Details</h1>
                 <div class="section-header-breadcrumb">
                     <a href="{{ route('admin_property_index') }}" class="btn btn-primary btn-icon icon-left shadow-primary">
                         <i class="fas fa-chevron-left"></i> Back to List
@@ -16,7 +16,7 @@
             </div>
 
             <div class="section-body">
-                @foreach ($properties as $property)
+
                     <div class="row">
                         <div class="col-lg-8">
 
@@ -182,7 +182,7 @@
 
                         </div>
                     </div>
-                @endforeach
+
             </div>
         </section>
     </div>

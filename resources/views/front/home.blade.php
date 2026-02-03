@@ -12,7 +12,8 @@
                         <div class="text">
                             <h2>Discover Your New Home</h2>
                             <p>
-                                You can get your desired awesome properties, homes, condos etc. here by name, category or location.
+                                You can get your desired awesome properties, homes, condos etc. here by name, category or
+                                location.
                             </p>
                         </div>
                         <div class="search-section">
@@ -21,7 +22,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Find Anything ...">
+                                                <input type="text" name="" class="form-control"
+                                                    placeholder="Find Anything ...">
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
@@ -83,246 +85,61 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property1.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-sale">
-                                    For Sale
+                @foreach ($properties as $property)
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="item">
+                            <div class="photo">
+                                <img class="main" src="{{ asset('uploads/' . $property->featured_photo) }}"
+                                    alt="{{ $property->name }}">
+                                <div class="top">
+
+                                    @if ($property->purpose == "Sale")
+                                        <div class="status-sale">
+                                            For Sale
+                                        </div>
+                                    @else
+                                        <div class="status-sale">
+                                            For Rent
+                                        </div>
+                                    @endif
+                                    @if ($property->is_featured == "Yes")
+                                        <div class="featured">
+                                            Featured
+                                        </div>
+                                    @endif
                                 </div>
-                                <div class="featured">
-                                    Featured
-                                </div>
+                                <div class="price">$ {{ $property->price }}</div>
+                                <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
                             </div>
-                            <div class="price">$56,000</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Sea Side Property</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 937 Jamajo Blvd, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Villa
+                            <div class="text">
+                                <h3><a href="{{ route('property_detail',['slug'=> $property->slug]) }}">{{ $property->name }}</a></h3>
+                                <div class="detail">
+                                    <div class="stat">
+                                        <div class="i1">{{ $property->size }} sqft</div>
+                                        <div class="i2">{{ $property->bedroom }} Bed</div>
+                                        <div class="i3">{{ $property->bathroom }} Bath</div>
                                     </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> Orland
+                                    <div class="address">
+                                        <i class="fas fa-map-marker-alt"></i> {{ $property->address }}
                                     </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent1.jpg') }}" alt="">
-                                    <a href="">Robert Johnson (AA Property)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property2.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-rent">
-                                    For Rent
-                                </div>
-                                <div class="featured">
-                                    Featured
-                                </div>
-                            </div>
-                            <div class="price">$4,900</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Modern Villa</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 2006 E Central Blvd, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Condo
+                                    <div class="type-location">
+                                        <div class="i1">
+                                            <i class="fas fa-edit"></i> {{ $property->type->name }}
+                                        </div>
+                                        <div class="i2">
+                                            <i class="fas fa-location-arrow"></i> {{ $property->location->name }}
+                                        </div>
                                     </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> Orland
+                                    <div class="agent-section">
+                                        <img class="agent-photo" src="{{ asset('uploads/' . $property->agent->photo) }}"
+                                            alt="{{ $property->agent->name }}">
+                                        <a href="">{{ $property->agent->name }}</a>
                                     </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent2.jpg') }}" alt="">
-                                    <a href="">Eric Williams (BB Property)</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property3.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-sale">
-                                    For Sale
-                                </div>
-                            </div>
-                            <div class="price">$79,000</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Home with Swimming Pool</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 3152 Plaza Terrace, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Apartment
-                                    </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> New York
-                                    </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent3.jpg') }}" alt="">
-                                    <a href="">Brent Grundy (CC Property)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property4.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-sale">
-                                    For Sale
-                                </div>
-                            </div>
-                            <div class="price">$79,000</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Apartment in New York</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 3152 Plaza Terrace, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Apartment
-                                    </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> New York
-                                    </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent4.jpg') }}" alt="">
-                                    <a href="">Jason Schwartz (DD Property)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property5.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-sale">
-                                    For Sale
-                                </div>
-                            </div>
-                            <div class="price">$79,000</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Nice Condo in Orlando</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 3152 Plaza Terrace, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Apartment
-                                    </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> New York
-                                    </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent5.jpg') }}" alt="">
-                                    <a href="">Michael Wyatt (EE Property)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="item">
-                        <div class="photo">
-                            <img class="main" src="{{ asset('uploads/property6.jpg') }}" alt="">
-                            <div class="top">
-                                <div class="status-sale">
-                                    For Sale
-                                </div>
-                            </div>
-                            <div class="price">$79,000</div>
-                            <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="property.html">Nice Villa in Boston</a></h3>
-                            <div class="detail">
-                                <div class="stat">
-                                    <div class="i1">2500 sqft</div>
-                                    <div class="i2">2 Bed</div>
-                                    <div class="i3">2 Bath</div>
-                                </div>
-                                <div class="address">
-                                    <i class="fas fa-map-marker-alt"></i> 3152 Plaza Terrace, Orlando FL 32803
-                                </div>
-                                <div class="type-location">
-                                    <div class="i1">
-                                        <i class="fas fa-edit"></i> Apartment
-                                    </div>
-                                    <div class="i2">
-                                        <i class="fas fa-location-arrow"></i> New York
-                                    </div>
-                                </div>
-                                <div class="agent-section">
-                                    <img class="agent-photo" src="{{ asset('uploads/agent6.jpg') }}" alt="">
-                                    <a href="">Joshua Lash (FF Property)</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
@@ -350,7 +167,8 @@
                         <div class="text">
                             <h2>Years of Experience</h2>
                             <p>
-                                With decades of combined experience in the industry, our agents have the expertise and knowledge to provide you with a seamless home-buying experience.
+                                With decades of combined experience in the industry, our agents have the expertise and
+                                knowledge to provide you with a seamless home-buying experience.
                             </p>
                         </div>
                     </div>
@@ -363,7 +181,8 @@
                         <div class="text">
                             <h2>Competitive Prices</h2>
                             <p>
-                                We understand that buying a home is a significant investment, which is why we strive to offer competitive prices to our clients.
+                                We understand that buying a home is a significant investment, which is why we strive to
+                                offer competitive prices to our clients.
                             </p>
                         </div>
                     </div>
@@ -376,7 +195,8 @@
                         <div class="text">
                             <h2>Responsive Communication</h2>
                             <p>
-                                Our responsive agents are here to answer your questions and address your concerns, ensuring a smooth and stress-free home-buying experience.
+                                Our responsive agents are here to answer your questions and address your concerns, ensuring
+                                a smooth and stress-free home-buying experience.
                             </p>
                         </div>
                     </div>
@@ -399,102 +219,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent1.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Michael Wyatt</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent2.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Jason Schwartz</a>
-                            </h2>
+                @foreach ($agents as $agent)
+                    <div class="col-lg-3 col-md-3">
+                        <div class="item">
+                            <div class="photo">
+                                <a href=""><img src="{{ asset('uploads/' . $agent->photo) }}" alt=""></a>
+                            </div>
+                            <div class="text">
+                                <h2>
+                                    <a href="agent.html">{{ $agent->name }}</a>
+                                </h2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent3.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Joshua Lash</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent4.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Eric Williams</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent5.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Jay Smith</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent6.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Joseph Commons</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent7.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Richard Renner</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="item">
-                        <div class="photo">
-                            <a href=""><img src="{{ asset('uploads/agent8.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="agent.html">Ryan Dingle</a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -514,94 +252,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location1.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">Boston</a></h2>
-                            <h4>(10 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location2.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">California</a></h2>
-                            <h4>(5 Properties)</h4>
+                @foreach ($locations as $location)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="item">
+                            <div class="photo">
+                                <a href="{{ route('location',$location->slug) }}"><img src="{{ asset('uploads/' . $location->photo) }}" alt="{{ $location->name }}"></a>
+                            </div>
+                            <div class="text">
+                                <h2><a href="{{ route('location',$location->slug) }}">{{ $location->name }}</a></h2>
+                                <h4>({{$location->properties_count }} Properties)</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location3.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">Chicago</a></h2>
-                            <h4>(2 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location4.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">Dallas</a></h2>
-                            <h4>(0 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location5.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">Denver</a></h2>
-                            <h4>(0 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location6.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">New York</a></h2>
-                            <h4>(0 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location7.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">San Diago</a></h2>
-                            <h4>(0 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="item">
-                        <div class="photo">
-                            <a href="location.html"><img src="{{ asset('uploads/location8.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="location.html">Washington</a></h2>
-                            <h4>(0 Properties)</h4>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -629,7 +292,11 @@
                             </div>
                             <div class="description">
                                 <p>
-                                    I recently worked with Patrick Johnson on purchasing my dream home and I couldn't have asked for a better experience. Patrick Johnson was knowledgeable, professional, and truly cared about finding me the perfect property. They were always available to answer my questions and made the entire process stress-free. I highly recommend Patrick Johnson to anyone looking to buy or sell a property!
+                                    I recently worked with Patrick Johnson on purchasing my dream home and I couldn't have
+                                    asked for a better experience. Patrick Johnson was knowledgeable, professional, and
+                                    truly cared about finding me the perfect property. They were always available to answer
+                                    my questions and made the entire process stress-free. I highly recommend Patrick Johnson
+                                    to anyone looking to buy or sell a property!
                                 </p>
                             </div>
                         </div>
@@ -643,7 +310,12 @@
                             </div>
                             <div class="description">
                                 <p>
-                                    I had the pleasure of working with Smith Brent during my recent home search and I can't speak highly enough of their services. Smith Brent listened to my needs and helped me find the perfect home that met all of my requirements. They were always there for me, from the initial search to closing, and made the process seamless and enjoyable. I would recommend Smith Brent to anyone looking for an experienced and dedicated real estate agent.
+                                    I had the pleasure of working with Smith Brent during my recent home search and I can't
+                                    speak highly enough of their services. Smith Brent listened to my needs and helped me
+                                    find the perfect home that met all of my requirements. They were always there for me,
+                                    from the initial search to closing, and made the process seamless and enjoyable. I would
+                                    recommend Smith Brent to anyone looking for an experienced and dedicated real estate
+                                    agent.
                                 </p>
                             </div>
                         </div>

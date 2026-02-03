@@ -24,28 +24,28 @@
                             <div class="row">
                                 {{-- Basic Information --}}
                                 <div class="col-md-4 mb-3">
-                                    <label for="" class="form-label">Title *</label>
+                                    <label for="" class="form-label">Title <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" placeholder="Property Title"
                                         value="{{ old('name') }}">
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="" class="form-label">Slug *</label>
+                                    <label for="" class="form-label">Slug <span class="text-danger">*</span></label>
                                     <input type="text" name="slug" class="form-control" placeholder="property-slug"
                                         value="{{ old('slug') }}">
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="" class="form-label">Price *</label>
+                                    <label for="" class="form-label">Price <span class="text-danger">*</span></label>
                                     <input type="text" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}">
                                 </div>
 
                                 <div class="col-md-12 mb-3">
                                     <label for="" class="form-label">Description</label>
-                                    <textarea name="description" class="form-control editor" cols="30" rows="10"></textarea>
+                                    <textarea name="description" class="form-control editor" cols="30" rows="10" value="{{ old('description') }}"></textarea>
                                 </div>
 
                                 {{-- Category & Type --}}
                                 <div class="col-md-4 mb-3">
-                                    <label for="location_id" class="form-label">Location *</label>
+                                    <label for="location_id" class="form-label">Location <span class="text-danger">*</span></label>
                                     <select name="location_id" class="form-control select2" value="{{ old('') }}">
                                         <option value="">--- Select Location ---</option>
                                         @foreach ($locations as $location)
@@ -54,7 +54,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="type_id" class="form-label">Type *</label>
+                                    <label for="type_id" class="form-label">Type <span class="text-danger">*</span></label>
                                     <select name="type_id" class="form-control select2" value="{{ old('') }}">
                                         <option value="">--- Select ---</option>
                                         @foreach ($types as $type)
@@ -63,32 +63,22 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="purpose" class="form-label">Purpose *</label>
+                                    <label for="purpose" class="form-label">Purpose <span class="text-danger">*</span></label>
                                     <select name="purpose" class="form-control select2" value="{{ old('') }}">
                                         <option value="">--- Select ---</option>
-                                        <option value="For Sale">For Sale</option>
-                                        <option value="For Rent">For Rent</option>
+                                        <option value="Sale">Sale</option>
+                                        <option value="Rent">Rent</option>
                                     </select>
                                 </div>
 
                                 {{-- Property Details --}}
                                 <div class="col-md-4 mb-3">
-                                    <label for="bedroom" class="form-label">Bedrooms</label>
-                                    <select name="bedroom" class="form-control select2">
-                                        <option value="">--- Select ---</option>
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                    <label for="bedroom" class="form-label">Bedrooms<span class="text-danger">*</span></label>
+                                   <input type="number" name="bedroom" class="form-control" value="{{ old('bedroom') }}">
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="bathroom" class="form-label">Bathrooms</label>
-                                    <select name="bathroom" class="form-control select2">
-                                        <option value="">--- Select ---</option>
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                    <label for="bathroom" class="form-label">Bathrooms <span class="text-danger">*</span></label>
+                                    <input type="number" name="bathroom" class="form-control" value="{{ old('bathroom') }}">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="size" class="form-label">Size (Sqft)</label>
@@ -116,11 +106,19 @@
                                     <label for="built_year" class="form-label">Built Year</label>
                                     <input type="text" name="built_year" class="form-control" value="{{ old('built_year') }}">
                                 </div>
-
+                                <div class="col-md-4 mb-3">
+                                    <label for="is_featured" class="form-label">is_featured</label>
+                                    <select name="is_featured" class="form-control select2">
+                                        <option value="Yes">Yes</option><option value="No">NO</option>
+                                        
+                                    </select>
+                                </div>
+                        
                                 <div class="col-md-12 mb-3">
                                     <label for="map" class="form-label">Location Map (Iframe Code)</label>
                                     <textarea name="map" class="form-control h-150" cols="30" rows="10"></textarea>
                                 </div>
+                                 
 
                                 {{-- Amenities (Checkboxes) --}}
                                 <div class="col-md-12 mb-3">
@@ -142,9 +140,9 @@
 
                                 {{-- Featured Photo & Preview --}}
                                 <div class="col-md-6 mb-3">
-                                    <label for="featured_photo" class="form-label">Featured Photo *</label>
+                                    <label for="featured_photo" class="form-label">Featured Photo <span class="text-danger">*</span></label>
                                     <div class="mb-2">
-                                        <img src="" id="showImage" alt="Preview"
+                                        <img src="{{ asset('uploads/default.png') }}" id="showImage" alt="Preview"
                                             class="w-200 h-150" style="border: 1px solid #ddd; object-fit: cover;">
                                     </div>
                                     <input type="file" name="featured_photo" id="image" class="form-control" value="{{ old('') }}">
@@ -163,5 +161,30 @@
 @endsection
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.querySelector('input[name="name"]');
+    const slugInput = document.querySelector('input[name="slug"]');
 
+    if (nameInput && slugInput) {
+        nameInput.addEventListener('keyup', function() {
+            let name = this.value;
+            let slug = name.toLowerCase()
+                           .replace(/ /g, '-')          
+                           .replace(/[^\w-]+/g, '')     
+                           .replace(/-+$/, '');         
+
+            slugInput.value = slug;
+        });
+    }
+});
+
+$(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
 </script>

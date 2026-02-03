@@ -25,15 +25,15 @@
                         <div class="row">
                             {{-- Basic Information --}}
                             <div class="col-md-4 mb-3">
-                                <label for="" class="form-label">Title *</label>
+                                <label for="" class="form-label">Title <span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name', $property->name) }}">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="" class="form-label">Slug *</label>
+                                <label for="" class="form-label">Slug <span class="text-danger">*</span></label>
                                 <input type="text" name="slug" class="form-control" value="{{ old('slug', $property->slug) }}">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="" class="form-label">Price *</label>
+                                <label for="" class="form-label">Price <span class="text-danger">*</span></label>
                                 <input type="text" name="price" class="form-control" value="{{ old('price', $property->price) }}">
                             </div>
 
@@ -44,7 +44,7 @@
 
                             {{-- Category & Type --}}
                             <div class="col-md-4 mb-3">
-                                <label for="location_id" class="form-label">Location *</label>
+                                <label for="location_id" class="form-label">Location <span class="text-danger">*</span></label>
                                 <select name="location_id" class="form-control select2">
                                     @foreach ($locations as $location)
                                         <option value="{{ $location->id }}" {{ $location->id == $property->location_id ? 'selected' : '' }}>
@@ -54,7 +54,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="type_id" class="form-label">Type *</label>
+                                <label for="type_id" class="form-label">Type <span class="text-danger">*</span></label>
                                 <select name="type_id" class="form-control select2">
                                     @foreach ($types as $type)
                                         <option value="{{ $type->id }}" {{ $type->id == $property->type_id ? 'selected' : '' }}>
@@ -64,7 +64,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="purpose" class="form-label">Purpose *</label>
+                                <label for="purpose" class="form-label">Purpose <span class="text-danger">*</span></label>
                                 <select name="purpose" class="form-control select2">
                                     <option value="For Sale" {{ $property->purpose == 'For Sale' ? 'selected' : '' }}>For Sale</option>
                                     <option value="For Rent" {{ $property->purpose == 'For Rent' ? 'selected' : '' }}>For Rent</option>
@@ -114,7 +114,13 @@
                                 <label for="built_year" class="form-label">Built Year</label>
                                 <input type="text" name="built_year" class="form-control" value="{{ old('built_year', $property->built_year) }}">
                             </div>
-
+                              <div class="col-md-4 mb-3">
+                                <label for="is_featured" class="form-label font-bold text-gray-700">Is Featured?</label>
+                                <select name="is_featured" id="is_featured" class="form-select select2 w-full border-gray-300 rounded-lg focus:ring-primary">
+                                    <option value="Yes" {{ (old('is_featured', $property->is_featured) == 'Yes') ? 'selected' : '' }}>Yes</option>
+                                    <option value="No" {{ (old('is_featured', $property->is_featured) == 'No') ? 'selected' : '' }}>No</option>
+                                </select>
+                            </div>
                             <div class="col-md-12 mb-3">
                                 <label for="map" class="form-label">Location Map (Iframe Code)</label>
                                 <textarea name="map" class="form-control h-150" cols="30" rows="10">{{ old('map', $property->map) }}</textarea>

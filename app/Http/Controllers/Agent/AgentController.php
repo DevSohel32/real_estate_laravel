@@ -203,15 +203,7 @@ class AgentController extends Controller
             'designation' => 'required',
             'address' => 'required',
             'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'website' => 'required',
-            'facebook' => 'required',
-            'linkedin' => 'required',
-            'twitter' => 'required',
-            'instagram' => 'required',
-            'biography' => 'required',
+            
         ]);
 
         $agent = Agent::where('id', Auth::guard('agent')->user()->id)->first();
@@ -508,6 +500,9 @@ class AgentController extends Controller
             'name' => 'required',
             'slug' => 'required|unique:properties',
             'price' => 'required',
+            'bedroom' => 'required',
+            'bathroom' => 'required',
+            'size'=>'required',
         ]);
 
         $property = new Property();
@@ -548,7 +543,7 @@ class AgentController extends Controller
         $property->map = $request->map;
         $property->amenities = $amenities;
         $property->status = "Pending";
-        $property->is_featured = 'No'; // Default value set korlam
+        $property->is_featured = $request->is_featured;
 
         $property->save();
 
@@ -606,6 +601,7 @@ class AgentController extends Controller
         $property->built_year  = $request->built_year;
         $property->map         = $request->map;
         $property->amenities   = $amenities;
+        $property->is_featured = $request->is_featured;
         $property->update();
 
         return redirect()->route('agent_property_index')->with('success', 'Property updated successfully!');

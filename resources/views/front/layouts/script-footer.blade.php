@@ -1,4 +1,4 @@
-<script src="{{ asset('dist-front/js/custom.js') }}"></script>
+
 @if ($errors->any())
         @foreach ($errors->all() as $error)
             <script>
@@ -31,3 +31,5 @@
             });
         </script>
     @endif
+
+<script src="{{ asset('dist-front/js/custom.js') }}"></script>

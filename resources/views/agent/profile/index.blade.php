@@ -41,37 +41,37 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for=""> Name </label>
+                                <label for=""> Name <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control" value="{{ Auth::guard('agent')->user()->name }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for=""> Email </label>
+                                <label for=""> Email <span class="text-danger">*</span> </label>
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control" value="{{ Auth::guard('agent')->user()->email }}">
                                 </div>
                             </div>
                              <div class="col-md-6 mb-3">
-                                <label for=""> Company </label>
+                                <label for=""> Company <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="company" class="form-control" value="{{ Auth::guard('agent')->user()->company }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for=""> Designation </label>
+                                <label for=""> Designation <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="designation" class="form-control" value="{{ Auth::guard('agent')->user()->designation }}">
                                 </div>
                             </div>
                              <div class="col-md-6 mb-3">
-                                <label for=""> Phone </label>
+                                <label for=""> Phone <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="phone" class="form-control" value="{{ Auth::guard('agent')->user()->phone }}">
                                 </div>
                             </div>
                               <div class="col-md-6 mb-3">
-                                <label for=""> Address </label>
+                                <label for=""> Address <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="address" class="form-control" value="{{ Auth::guard('agent')->user()->address }}">
                                 </div>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                               <div class="col-md-4 mb-3">
-                                <label for=""> City </label>
+                                <label for=""> City <span class="text-danger">*</span></label>
                                 <div class="form-group">
                                     <input type="text" name="city" class="form-control" value="{{ Auth::guard('agent')->user()->city }}">
                                 </div>
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                               <div class="col-md-12 mb-3">
-                                <label for="">Biography</label>
+                                <label for="">Biography <span class="text-danger">*</span> </label>
                                 <div class="form-group">
                                     <textarea name="biography" class="form-control h-300"  rows="5">{{ Auth::guard('agent')->user()->biography }}</textarea>
                                 </div>

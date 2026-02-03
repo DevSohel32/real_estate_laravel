@@ -7,11 +7,11 @@
         <section class="section">
             <div class="section-header d-flex justify-content-between">
                 <div>
-                    <h1>Location Management</h1>
+                    <h1>Customer Management</h1>
                 </div>
                 <div class="ml-auto">
                     <a href="{{ route('admin_customer_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add
-                        Location</a>
+                        Customer</a>
                 </div>
             </div>
             <div class="section-body">
