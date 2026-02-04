@@ -16,9 +16,9 @@
     @include('front.layouts.script')
 </head>
 
-<body>
-
+<body class="d-flex flex-column min-vh-100"> 
     <div class="navbar-area" id="stickymenu">
+
         <!-- Menu For Mobile Device -->
         <div class="mobile-nav">
             <a href="{{ route('home') }}" class="logo">
@@ -29,8 +29,9 @@
         <!-- Menu For Desktop Device -->
         @include('front.layouts.nav')
     </div>
-    @yield('content')
-
+    <div class="flex-grow-1">
+        @yield('content')
+    </div>
     @include('front.layouts.footer')
 
     <div class="scroll-top">

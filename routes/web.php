@@ -21,8 +21,10 @@ Route::get('/select_user', [FrontController::class, 'select_user'])->name('selec
 Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 Route::get('/property/{slug}', [FrontController::class, 'property_detail'])->name('property_detail');
 Route::get('/locations', [FrontController::class, 'locations'])->name('locations');
-
 Route::get('/location/{slug}', [FrontController::class, 'location'])->name('location');
+Route::get('/front-agents', [FrontController::class, 'agents'])->name('agents');
+Route::get('/front-agents', [FrontController::class, 'agents'])->name('agents');
+Route::get('/front-agent/details/{id}', [FrontController::class, 'agent'])->name('agent');
 
 // User
 Route::middleware('auth')->group(function () {

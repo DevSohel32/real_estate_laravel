@@ -19,7 +19,7 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="left-item">
                         <div class="main-photo">
-                            <img src="{{asset('uploads/' . $property->featured_photo)}}" alt="{{ $property->name }}">
+                            <img src="{{ asset('uploads/' . $property->featured_photo) }}" alt="{{ $property->name }}">
                         </div>
                         <h2>
                             Description
