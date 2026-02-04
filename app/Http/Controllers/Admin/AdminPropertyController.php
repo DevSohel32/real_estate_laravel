@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use index;
 use App\Models\Property;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

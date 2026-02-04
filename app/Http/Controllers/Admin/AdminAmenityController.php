@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Amenity;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AdminAmenityController extends Controller
 {
-     public function index()
+    public function index()
     {
         $amenities = Amenity::orderBy('id', 'asc')->get();
         return view('admin.amenity.index', compact('amenities'));
@@ -21,13 +22,11 @@ class AdminAmenityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:locations|max:255',
+            'name' => 'required|unique:amenities|max:255',
         ]);
-
         $type = new Amenity();
         $type->name = $request->name;
         $type->save();
-
         return redirect()->route('admin_amenity_index')->with('success', 'Amenity created successfully!');
     }
 
@@ -48,17 +47,29 @@ class AdminAmenityController extends Controller
         $amenity = Amenity::findOrFail($request->id);
         $amenity->name = $request->name;
         $amenity->update();
-
-
         return redirect()->route('admin_amenity_index')->with('success', 'Amenity created successfully');
     }
 
     public function destroy($id)
     {
-        $type = Amenity::findOrFail($id);
+        $amenity = Amenity::findOrFail($id);
+        $properties = Property::get();
+        $allAmenities = [];
+        foreach ($properties as $item) {
+            if (!$item->amenities) {
+                continue;
+            }
+            $amenitiesArray = explode(',', $item->amenities);
+            foreach ($amenitiesArray as $temp_item) {
+                $allAmenities[] = $temp_item;
+            }
+        }
+        if (in_array($amenity->name, $allAmenities)) {
+            return redirect()->route('admin_amenity_index')
+                ->with('error', 'Amenity cannot be deleted as it is associated with a property');
+        }
 
-        $type->delete();
-
+        $amenity->delete();
         return redirect()->back()->with('success', 'Amenity deleted successfully');
     }
 }

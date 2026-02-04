@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Location;
+use App\Models\Property;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -95,13 +96,22 @@ class AdminLocationController extends Controller
     public function destroy($id)
     {
         $location = Location::findOrFail($id);
+        $hasProperty = Property::where('location_id', $location->id)->exists();
+        if ($hasProperty) {
+            return redirect()->route('admin_locations_index')
+                ->with('error', 'Cannot delete location. There are properties associated with it.');
+        }
 
-        if ($location->photo && file_exists(public_path('uploads/' . $location->photo))) {
-            unlink(public_path('uploads/' . $location->photo));
+        // Delete photo if exists
+        if ($location->photo) {
+            $photoPath = public_path('uploads/' . $location->photo);
+            if (file_exists($photoPath)) {
+                unlink($photoPath);
+            }
         }
 
         $location->delete();
-
-        return redirect()->back()->with('success', 'Location deleted successfully');
+        return redirect()->back()
+            ->with('success', 'Location deleted successfully');
     }
 }
